@@ -49,4 +49,10 @@ public class Diary {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "depression_id")
     Depression depression;
+
+    // 수정 할때 사용
+    public void update(String content) {
+        this.content = content;
+        updateDate = LocalDateTime.now();
+    }
 }

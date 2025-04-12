@@ -25,7 +25,7 @@ public class DiaryService {
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
     }
 
-    // 일기 목록 조회
+    // 회원별 일기 목록 조회
     public List<Diary> getAllDiaries(Long memberId) {
         return diaryRepository.findByMemberId(memberId);
     }
@@ -33,7 +33,8 @@ public class DiaryService {
     // 일기 저장
     @Transactional
     public Diary createDiary(Diary diary) {
-        // AI 분석 추가 해야함
+
+        analyzeDiary(diary);
         return diaryRepository.save(diary);
     }
 
@@ -41,15 +42,18 @@ public class DiaryService {
     // 일기 수정
     @Transactional
     public Diary updateDiary(Long diaryId, String content) {
+
         // 수정할 일기 찾아옴
-        Diary originDiary = diaryRepository.findById(diaryId)
+        Diary diary = diaryRepository.findById(diaryId)
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
 
         // 일기 내용 수정
-        originDiary.update(content);
+        diary.update(content);
 
+        // 일기 분석 다시함
+        analyzeDiary(diary);
 
-        return originDiary;
+        return diary;
     }
 
     // 일기 삭제
@@ -62,7 +66,7 @@ public class DiaryService {
     //미완
     @Transactional
     public Diary analyzeDiary(Diary diary) {
-        // 일기 분석 어쩌구 로직
+        // 일기 분석 어쩌구 AI 저쩌구 로직
 
 
         return diary;

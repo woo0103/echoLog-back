@@ -32,4 +32,11 @@ public class DiaryFeedback {
     LocalDateTime createDate;
     // 최종 수정일
     LocalDateTime updateDate;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.createDate == null) {
+            this.createDate = LocalDateTime.now();
+        }
+    }
 }

@@ -42,9 +42,17 @@ public class DiaryController {
     // 일기 목록 조회
     @GetMapping
     public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam("memberId") Long memberId) {
-        List<Diary> Diaries = diaryService.getAllDiaries(memberId);
+        // 일기 목록 가져옴
+        List<Diary> diaries = diaryService.getAllDiaries(memberId);
+
+        // 일기 없으면 빈 리스트 넣어줌(null 체크)
+        if (diaries == null) {
+            diaries = new ArrayList<>();
+        }
+
+        // 일기 리스트를 Dto 리스트로 변환
         List<DiaryListResponseDto> responseDiaries = new ArrayList<>();
-        for (Diary diary : Diaries) {
+        for (Diary diary : diaries) {
             responseDiaries.add(DiaryListResponseDto.from(diary));
         }
 

@@ -69,4 +69,12 @@ public class Diary {
         this.content = content;
         updateDate = LocalDateTime.now();
     }
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.createDate == null) {
+            this.createDate = LocalDateTime.now();
+        }
+    }
+
 }

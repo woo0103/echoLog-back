@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Transactional(readOnly = true)
@@ -20,6 +22,11 @@ public class MemberService {
     public Member getMember(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new MemberNotFoundException("member not found"));
+    }
+
+    // 전체 회원 조회
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
     }
 
     // 회원 생성

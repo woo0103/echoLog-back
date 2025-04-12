@@ -1,10 +1,12 @@
 package com.deli.echolog.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Table(name = "DIARY_FEEDBACK")
 // 일기 피드백 엔티티
 public class DiaryFeedback {

@@ -1,10 +1,12 @@
 package com.deli.echolog.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Table(name = "DEPRESSION")
 // 우울증 분석 엔티티
 public class Depression {

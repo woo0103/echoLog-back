@@ -1,10 +1,12 @@
 package com.deli.echolog.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Table(name = "TRANSFORM_DIARY")
 // 변환된 일기 엔티티
 public class TransformDiary {

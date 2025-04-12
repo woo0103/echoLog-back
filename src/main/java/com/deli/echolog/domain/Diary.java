@@ -50,6 +50,20 @@ public class Diary {
     @JoinColumn(name = "depression_id")
     Depression depression;
 
+    public Diary() {
+    }
+
+    public Diary(String content) {
+        this.content = content;
+    }
+
+    // member랑 연관관계 설정
+    public void setMember(Member member) {
+
+        this.member = member;
+        member.getDiaries().add(this);
+    }
+
     // 수정 할때 사용
     public void update(String content) {
         this.content = content;

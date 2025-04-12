@@ -18,14 +18,6 @@ public class DiaryService {
     // 생성자 주입
     private final DiaryRepository diaryRepository;
 
-
-    // 일기 저장
-    @Transactional
-    public Diary createDiary(Diary diary) {
-        // AI 분석 추가 해야함
-        return diaryRepository.save(diary);
-    }
-
     // 일기 조회
     public Diary getDiary(Long id) {
         // id에 해당하는 일기가 없으면 예외 던짐
@@ -38,15 +30,23 @@ public class DiaryService {
         return diaryRepository.findByMemberId(memberId);
     }
 
+    // 일기 저장
+    @Transactional
+    public Diary createDiary(Diary diary) {
+        // AI 분석 추가 해야함
+        return diaryRepository.save(diary);
+    }
+
+
     // 일기 수정
     @Transactional
-    public Diary updateDiary(Diary diary) {
+    public Diary updateDiary(Long diaryId, String content) {
         // 수정할 일기 찾아옴
-        Diary originDiary = diaryRepository.findById(diary.getId())
+        Diary originDiary = diaryRepository.findById(diaryId)
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
 
         // 일기 내용 수정
-        originDiary.update(diary.getContent());
+        originDiary.update(content);
 
 
         return originDiary;
@@ -58,6 +58,14 @@ public class DiaryService {
         diaryRepository.deleteById(id);
     }
 
+    // 일기 분석
+    //미완
+    @Transactional
+    public Diary analyzeDiary(Diary diary) {
+        // 일기 분석 어쩌구 로직
 
+
+        return diary;
+    }
 
 }

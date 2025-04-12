@@ -28,7 +28,7 @@ public class Member {
 
     // 역할(관리자, 사용자 구분)
     @Enumerated(EnumType.STRING)
-    Role Role;
+    Role role;
     // 생년월일
     LocalDate birthDate;
     // 폰번호
@@ -44,9 +44,24 @@ public class Member {
     // 최종 수정일
     LocalDateTime updateDate;
 
+    public Member() {
+    }
+
+    public Member(String name, String email, String password, Role role, LocalDate birthDate, String phone) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.birthDate = birthDate;
+        this.phone = phone;
+    }
+
+    // 생성일자 넣는거
     @PrePersist
     protected void onCreate() {
-        this.createDate = LocalDateTime.now();
+        if (this.createDate == null) {
+            this.createDate = LocalDateTime.now();
+        }
     }
 
 

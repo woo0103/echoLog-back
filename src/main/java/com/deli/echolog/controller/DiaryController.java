@@ -1,13 +1,97 @@
 package com.deli.echolog.controller;
 
+import com.deli.echolog.domain.Diary;
+import com.deli.echolog.domain.Member;
+import com.deli.echolog.dto.diary.DiaryCreateRequestDto;
+import com.deli.echolog.dto.diary.DiaryListResponseDto;
+import com.deli.echolog.dto.diary.DiaryResponseDto;
+import com.deli.echolog.dto.diary.DiaryUpdateRequestDto;
 import com.deli.echolog.service.DiaryService;
+import com.deli.echolog.service.MemberService;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
 @AllArgsConstructor
+@Slf4j
+@RequestMapping("/api/diaries")
 public class DiaryController {
 
     // 생성자 주입
     private final DiaryService diaryService;
+    private final MemberService memberService;
+
+    // 일기 단건 조회
+    @GetMapping("/{diaryId}")
+    public ResponseEntity<DiaryResponseDto> getDiary(@PathVariable Long diaryId) {
+
+        // 아이디로 일기 찾음
+        Diary diary = diaryService.getDiary(diaryId);
+
+        // DTO로 변환하고 반환
+        return ResponseEntity.ok(DiaryResponseDto.from(diary));
+    }
+
+    // 일기 목록 조회
+    @GetMapping
+    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam("memberId") Long memberId) {
+        List<Diary> Diaries = diaryService.getAllDiaries(memberId);
+        List<DiaryListResponseDto> responseDiaries = new ArrayList<>();
+        for (Diary diary : Diaries) {
+            responseDiaries.add(DiaryListResponseDto.from(diary));
+        }
+
+        Map<String, List<DiaryListResponseDto>> response = new HashMap<>();
+        response.put("diaries", responseDiaries);
+        return ResponseEntity.ok(response);
+    }
+
+    // 일기 저장
+    @PostMapping
+    public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto) {
+        log.info(""+ diaryCreateRequestDto.getMemberId());
+        Member member = memberService.getMember(diaryCreateRequestDto.getMemberId());
+        log.info(member.getName());
+        // 일기 내용 넣음
+        Diary diary = new Diary(diaryCreateRequestDto.getContent());
+
+        // member랑 연관관계 설정
+        diary.setMember(member);
+
+        // 임시 저장이 아니면 분석함
+        if (!temp) {
+            // 일기 분석함
+            diaryService.analyzeDiary(diary);
+        }
+
+        // 일기 저장
+        Diary savedDiary = diaryService.createDiary(diary);
+
+        // Dto로 변환하고 반환
+        return ResponseEntity.ok(DiaryResponseDto.from(savedDiary));
+    }
+
+    // 일기 수정
+    @PutMapping("/{diaryId}")
+    public ResponseEntity<DiaryResponseDto> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryUpdateRequestDto diaryUpdateRequestDto) {
+        // 일기 수정
+        String content = diaryUpdateRequestDto.getContent();
+        Diary diary = diaryService.updateDiary(diaryId, content);
+
+        // Dto로 변환하고 반환
+        return ResponseEntity.ok(DiaryResponseDto.from(diary));
+    }
+
+    // 일기 삭제
+    @DeleteMapping("/{diaryId}")
+    public void deleteDiary(@PathVariable Long diaryId) {
+        diaryService.deleteDiary(diaryId);
+    }
 }

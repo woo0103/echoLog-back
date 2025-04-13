@@ -17,15 +17,15 @@ public class TransformDiary {
 
     // 원본 일기
     @OneToOne(mappedBy = "transformDiary")
-    Diary diary;
+    private Diary diary;
 
     // 변환된 일기 내용
     @Column(columnDefinition = "TEXT")
-    String content;
+    private String content;
     // 생성일자
-    LocalDateTime createDate;
+    private LocalDateTime createDate;
     // 최종 수정일
-    LocalDateTime updateDate;
+    private LocalDateTime updateDate;
 
     @PrePersist
     protected void onCreate() {

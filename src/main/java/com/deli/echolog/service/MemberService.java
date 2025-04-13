@@ -29,7 +29,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    // 회원 생성
+    // 회원 가입
     @Transactional
     public Member createMember(Member member) {
         return memberRepository.save(member);

@@ -14,19 +14,19 @@ public class Emotion {
     @Id
     @GeneratedValue
     @Column(name = "emotion_id")
-    Long id;
+    private Long id;
 
     // 분석한 일기
     @OneToOne(mappedBy = "emotion")
-    Diary diary;
+    private Diary diary;
     // 감정 타입(6개중 하나)
-    String type;
+    private String type;
     // 감정 강도
-    Double intensity;
+    private Double intensity;
     // 생성일자
-    LocalDateTime createDate;
+    private LocalDateTime createDate;
     // 최종 수정일
-    LocalDateTime updateDate;
+    private LocalDateTime updateDate;
 
     @PrePersist
     protected void onCreate() {

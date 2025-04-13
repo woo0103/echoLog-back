@@ -34,6 +34,7 @@ public class DiaryService {
     @Transactional
     public Diary createDiary(Diary diary) {
 
+        // 분석한 다음에 저장함
         analyzeDiary(diary);
         return diaryRepository.save(diary);
     }
@@ -65,11 +66,9 @@ public class DiaryService {
     // 일기 분석
     //미완
     @Transactional
-    public Diary analyzeDiary(Diary diary) {
+    public void analyzeDiary(Diary diary) {
         // 일기 분석 어쩌구 AI 저쩌구 로직
 
-
-        return diary;
     }
 
 }

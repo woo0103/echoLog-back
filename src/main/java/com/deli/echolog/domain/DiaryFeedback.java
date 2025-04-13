@@ -14,24 +14,24 @@ public class DiaryFeedback {
     @Id
     @GeneratedValue
     @Column(name = "diary_feedback_id")
-    Long id;
+    private Long id;
 
     // 피드백 한 일기
     @OneToOne(mappedBy = "diaryFeedback")
-    Diary diary;
+    private Diary diary;
 
     // 피드백 내용
     @Column(columnDefinition = "TEXT")
-    String content;
+    private String content;
 
     // 피드백에대한 사용자 평가
     @Enumerated(value = EnumType.STRING)
-    UserReaction userReaction;
+    private UserReaction userReaction;
 
     // 생성일자
-    LocalDateTime createDate;
+    private LocalDateTime createDate;
     // 최종 수정일
-    LocalDateTime updateDate;
+    private LocalDateTime updateDate;
 
     @PrePersist
     protected void onCreate() {

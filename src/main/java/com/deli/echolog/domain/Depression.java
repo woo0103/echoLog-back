@@ -13,21 +13,25 @@ public class Depression {
     @Id
     @GeneratedValue
     @Column(name = "depression_id")
-    Long id;
+    private Long id;
 
     // 분석한 일기
     @OneToOne(mappedBy = "depression")
-    Diary diary;
+    private Diary diary;
 
-    // 울울증 분석 내용
+    // 우울증 분석 내용
     @Column(columnDefinition = "TEXT")
-    String content;
+    private String content;
 
     // 생성일자
-    LocalDateTime createDate;
+    private LocalDateTime createDate;
 
     // 최종 수정일
-    LocalDateTime updateDate;
+    private LocalDateTime updateDate;
+
+    public void changeDiary(Diary diary) {
+        this.diary = diary;
+    }
 
     @PrePersist
     protected void onCreate() {

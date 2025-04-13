@@ -16,33 +16,33 @@ public class Member {
     @Id
     @GeneratedValue
     @Column(name = "member_id")
-    Long id;
+    private Long id;
 
     // 이름(길이제한 50)
     @Column(length = 50)
-    String name;
+    private String name;
     // 이메일(로그인할때 아이디로 씀)
-    String email;
+    private String email;
     // 비번
-    String password;
+    private String password;
 
     // 역할(관리자, 사용자 구분)
     @Enumerated(EnumType.STRING)
-    Role role;
+    private Role role;
     // 생년월일
-    LocalDate birthDate;
+    private LocalDate birthDate;
     // 폰번호
     @Column(length = 20)
-    String phone;
+    private String phone;
 
     // 작성한 일기 목록
     @OneToMany(mappedBy = "member")
-    List<Diary> diaries = new ArrayList<>();
+    private List<Diary> diaries = new ArrayList<>();
 
     // 생성일자
-    LocalDateTime createDate;
+    private LocalDateTime createDate;
     // 최종 수정일
-    LocalDateTime updateDate;
+    private LocalDateTime updateDate;
 
     public Member() {
     }

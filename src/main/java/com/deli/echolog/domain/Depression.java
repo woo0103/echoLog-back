@@ -23,6 +23,15 @@ public class Depression {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    // 감정 점수
+    private Double emotionScore;
+
+    // 우울 단어 점수
+    private double depressionWordScore;
+
+    // phq9 점수
+    private double phq9Score;
+
     // 생성일자
     private LocalDateTime createDate;
 
@@ -32,6 +41,15 @@ public class Depression {
     public void changeDiary(Diary diary) {
         this.diary = diary;
     }
+
+    public void update(String content, Double emotionScore, Double depressionWordScore, Double phq9Score) {
+        this.content = content;
+        this.emotionScore = emotionScore;
+        this.depressionWordScore = depressionWordScore;
+        this.phq9Score = phq9Score;
+    }
+
+
 
     @PrePersist
     protected void onCreate() {

@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 // 일기 생성일자도 반환해야되나?
 public class DiaryListResponseDto {
 
-    Long diaryId;
-    LocalDateTime createDate;
-    String emotionType;
+    private Long diaryId;
+    private LocalDateTime createDate;
+    private String emotionType;
 
     /**
      * 일기를 Dto로 바꾸는 메서드임

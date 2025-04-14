@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 // 일기 생성할 때 받는 dto
 public class DiaryCreateRequestDto {
-    Long memberId;
-    String content;
+    private Long memberId;
+    private String content;
 
 }

@@ -14,12 +14,12 @@ import java.time.LocalDate;
 public class MemberResponseDto {
 
 
-    Long memberId;
-    String name;
-    String email;
-    Role role;
-    LocalDate birthDate;
-    String phone;
+    private Long memberId;
+    private String name;
+    private String email;
+    private Role role;
+    private LocalDate birthDate;
+    private String phone;
 
     public static MemberResponseDto from(Member member) {
         return new MemberResponseDto(

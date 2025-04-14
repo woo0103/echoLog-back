@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 // 일기 수정할 때 받는 dto
 public class DiaryUpdateRequestDto {
-    String content;
+    private String content;
 }

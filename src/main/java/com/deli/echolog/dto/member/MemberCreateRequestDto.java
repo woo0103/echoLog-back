@@ -11,12 +11,12 @@ import java.time.LocalDate;
 @Setter
 public class MemberCreateRequestDto {
 
-    String name;
-    String email;
-    String password;
-    Role role;
-    LocalDate birthDate;
-    String phone;
+    private String name;
+    private String email;
+    private String password;
+    private Role role;
+    private LocalDate birthDate;
+    private String phone;
 
     public Member toEntity() {
         return new Member(

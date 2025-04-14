@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class DepressionService {
 
     private final DepressionRepository depressionRepository;
-    private final DiaryService diaryService;
 
     // 우울증 분석 조회
     public Depression getDepression(Long id) {
@@ -27,8 +26,8 @@ public class DepressionService {
 
     @Transactional
     // 우울증 분석 결과 저장
-    public Depression createDepression(Long diaryId) {
-        Depression depression = analyzeDepression(diaryId);
+    public Depression createDepression(Diary diary) {
+        Depression depression = analyzeDepression(diary);
         return depressionRepository.save(depression);
     }
 
@@ -51,16 +50,7 @@ public class DepressionService {
     // 우울증 분석 메서드
     // 일기 정보를 받아서 우울증 분석 반환
     // 연관관계도 여기서 설정함
-    // 오버라이딩
 
-     // 아이디만 받는 메서드
-    public Depression analyzeDepression(Long diaryId) {
-        Diary diary = diaryService.getDiary(diaryId);
-        Depression depression = analyzeDepression(diary);
-        return depression;
-    }
-
-    // Diary 받는 메서드
     public Depression analyzeDepression(Diary diary) {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침

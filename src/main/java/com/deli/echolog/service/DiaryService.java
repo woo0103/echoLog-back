@@ -72,7 +72,7 @@ public class DiaryService {
     @Transactional
     public void analyzeDiary(Diary diary) {
         // 우울증 분석 후 연관관계 까지 설정
-        Depression depression = depressionService.createDepression(diary.getId());
+        Depression depression = depressionService.createDepression(diary);
 
     }
 

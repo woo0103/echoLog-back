@@ -24,7 +24,7 @@ public class Depression {
     private String content;
 
     // 감정 점수
-    private Double emotionScore;
+    private double emotionScore;
 
     // 우울 단어 점수
     private double depressionWordScore;

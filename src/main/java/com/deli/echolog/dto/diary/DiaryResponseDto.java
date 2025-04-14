@@ -10,14 +10,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DiaryResponseDto {
 
-    Long diaryId;
-    Long memberId;
-    String content;
-    Long transformDiaryId;
-    String transformContent;
-    Long emotionId;
-    Long diaryFeedbackId;
-    Long depressionId;
+    private Long diaryId;
+    private Long memberId;
+    private String content;
+    private Long transformDiaryId;
+    private String transformContent;
+    private Long emotionId;
+    private Long diaryFeedbackId;
+    private Long depressionId;
 
 
 

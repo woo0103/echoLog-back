@@ -70,6 +70,9 @@ public class DiaryController {
         // 일기 내용 넣음
         Diary diary = new Diary(diaryCreateRequestDto.getContent());
 
+        // 일기 저장
+        Diary savedDiary = diaryService.createDiary(diary);
+
         // member랑 연관관계 설정
         diary.setMember(member);
 
@@ -78,9 +81,6 @@ public class DiaryController {
             // 일기 분석함
             diaryService.analyzeDiary(diary);
         }
-
-        // 일기 저장
-        Diary savedDiary = diaryService.createDiary(diary);
 
         // Dto로 변환하고 반환
         return ResponseEntity.ok(DiaryResponseDto.from(savedDiary));

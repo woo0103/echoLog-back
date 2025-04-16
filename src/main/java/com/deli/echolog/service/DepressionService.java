@@ -55,6 +55,7 @@ public class DepressionService {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침
         Depression depression = new Depression();
+        depression.update("AI가 해줄거임", 10.0, 10.0, 10.0);
         diary.changeDepression(depression);
         return depression;
     }

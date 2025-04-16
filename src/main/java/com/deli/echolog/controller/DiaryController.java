@@ -64,9 +64,7 @@ public class DiaryController {
     // 일기 저장
     @PostMapping
     public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto) {
-        log.info(""+ diaryCreateRequestDto.getMemberId());
         Member member = memberService.getMember(diaryCreateRequestDto.getMemberId());
-        log.info(member.getName());
         // 일기 내용 넣음
         Diary diary = new Diary(diaryCreateRequestDto.getContent());
 

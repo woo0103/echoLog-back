@@ -20,6 +20,7 @@ public class Emotion {
     @OneToOne(mappedBy = "emotion")
     private Diary diary;
     // 감정 타입(6개중 하나)
+    @Enumerated(EnumType.STRING)
     private EmotionType emotionType;
     // 감정 강도
     private Double intensity;

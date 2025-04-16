@@ -49,6 +49,7 @@ public class DepressionService {
     // 우울증 분석 메서드
     // 일기 정보를 받아서 우울증 분석 반환
     // 연관관계도 여기서 설정함
+    @Transactional
     public Depression analyzeDepression(Diary diary) {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침

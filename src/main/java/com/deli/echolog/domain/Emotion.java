@@ -20,13 +20,22 @@ public class Emotion {
     @OneToOne(mappedBy = "emotion")
     private Diary diary;
     // 감정 타입(6개중 하나)
-    private String type;
+    private EmotionType emotionType;
     // 감정 강도
     private Double intensity;
     // 생성일자
     private LocalDateTime createDate;
     // 최종 수정일
     private LocalDateTime updateDate;
+
+    public void update(EmotionType emotionType, Double intensity) {
+        this.emotionType = emotionType;
+        this.intensity = intensity;
+    }
+
+    public void changeDiary(Diary diary) {
+        this.diary = diary;
+    }
 
     @PrePersist
     protected void onCreate() {

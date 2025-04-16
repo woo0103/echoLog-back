@@ -2,6 +2,7 @@ package com.deli.echolog.dto.diary;
 
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.Emotion;
+import com.deli.echolog.domain.EmotionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class DiaryListResponseDto {
 
     private Long diaryId;
     private LocalDateTime createDate;
-    private String emotionType;
+    private EmotionType emotionType;
 
     /**
      * 일기를 Dto로 바꾸는 메서드임
@@ -28,7 +29,7 @@ public class DiaryListResponseDto {
 
         // null 처리
         Emotion emotion = diary.getEmotion();
-        String emotionType = (emotion != null) ? emotion.getType() : null;
+        EmotionType emotionType = (emotion != null) ? emotion.getEmotionType() : null;
 
         return new DiaryListResponseDto(
                 diary.getId(), diary.getCreateDate(), emotionType

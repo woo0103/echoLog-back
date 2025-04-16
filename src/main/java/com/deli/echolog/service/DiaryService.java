@@ -2,6 +2,7 @@ package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Depression;
 import com.deli.echolog.domain.Diary;
+import com.deli.echolog.domain.Emotion;
 import com.deli.echolog.exception.DiaryNotFoundException;
 import com.deli.echolog.repository.DiaryRepository;
 import lombok.AllArgsConstructor;
@@ -19,11 +20,12 @@ public class DiaryService {
     // 생성자 주입
     private final DiaryRepository diaryRepository;
     private final DepressionService depressionService;
+    private final EmotionService emotionService;
 
     // 일기 조회
-    public Diary getDiary(Long id) {
+    public Diary getDiary(Long diaryId) {
         // id에 해당하는 일기가 없으면 예외 던짐
-        return diaryRepository.findById(id)
+        return diaryRepository.findById(diaryId)
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
     }
 
@@ -63,16 +65,18 @@ public class DiaryService {
 
     // 일기 삭제
     @Transactional
-    public void deleteDiary(Long id) {
-        diaryRepository.deleteById(id);
+    public void deleteDiary(Long diaryId) {
+        diaryRepository.deleteById(diaryId);
     }
 
     // 일기 분석
     //미완
     @Transactional
     public void analyzeDiary(Diary diary) {
-        // 우울증 분석 후 연관관계 까지 설정
+        // 분석 후 연관관계까지 설정
+        Emotion emotion = emotionService.createEmotion(diary);
         Depression depression = depressionService.createDepression(diary);
+
 
     }
 

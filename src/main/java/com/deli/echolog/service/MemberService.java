@@ -19,8 +19,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 회원 조회
-    public Member getMember(Long id) {
-        return memberRepository.findById(id)
+    public Member getMember(Long memberId) {
+        return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("member not found"));
     }
 
@@ -33,5 +33,11 @@ public class MemberService {
     @Transactional
     public Member createMember(Member member) {
         return memberRepository.save(member);
+    }
+
+    // 회원 탈퇴
+    @Transactional
+    public void deleteMember(Long memberId) {
+        memberRepository.deleteById(memberId);
     }
 }

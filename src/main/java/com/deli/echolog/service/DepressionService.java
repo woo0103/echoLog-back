@@ -18,39 +18,37 @@ public class DepressionService {
     private final DepressionRepository depressionRepository;
 
     // 우울증 분석 조회
-    public Depression getDepression(Long id) {
+    public Depression getDepression(Long depressionId) {
         // id에 해당하는 일기가 없으면 예외 던짐
-        return depressionRepository.findById(id)
+        return depressionRepository.findById(depressionId)
                 .orElseThrow(() -> new DepressionNotFoundException("depression not found"));
     }
 
-    @Transactional
     // 우울증 분석 결과 저장
+    @Transactional
     public Depression createDepression(Diary diary) {
         Depression depression = analyzeDepression(diary);
         return depressionRepository.save(depression);
     }
 
-    @Transactional
     // 우울증 분석 수정
+    @Transactional
     public Depression updateDepression(Long depressionId, String content, Double emotionScore, Double depressionWordScore, Double phq9Score) {
         Depression depression = getDepression(depressionId);
         depression.update(content, emotionScore, depressionWordScore, phq9Score);
         return depression;
     }
 
-    @Transactional
     // 우울증 분석 삭제
+    @Transactional
     public void deleteDepression(Long depressionId) {
         depressionRepository.deleteById(depressionId);
     }
 
 
-
     // 우울증 분석 메서드
     // 일기 정보를 받아서 우울증 분석 반환
     // 연관관계도 여기서 설정함
-
     public Depression analyzeDepression(Diary diary) {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침

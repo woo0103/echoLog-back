@@ -71,6 +71,12 @@ public class Diary {
         depression.changeDiary(this);
     }
 
+    // emotion이랑 연관관계 설정
+    public void changeEmotion(Emotion emotion) {
+        this.emotion = emotion;
+        emotion.changeDiary(this);
+    }
+
     // 수정 할때 사용
     public void update(String content) {
         this.content = content;
@@ -83,5 +89,5 @@ public class Diary {
             this.createDate = LocalDateTime.now();
         }
     }
-
 }
+

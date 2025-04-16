@@ -24,10 +24,11 @@ public class DepressionService {
                 .orElseThrow(() -> new DepressionNotFoundException("depression not found"));
     }
 
-    // 우울증 분석 결과 저장
+
+
+    // 우울증 분석 정보 넘어온 거 그대로 저장
     @Transactional
-    public Depression createDepression(Diary diary) {
-        Depression depression = analyzeDepression(diary);
+    public Depression saveDepression(Depression depression) {
         return depressionRepository.save(depression);
     }
 
@@ -42,7 +43,8 @@ public class DepressionService {
     // 우울증 분석 삭제
     @Transactional
     public void deleteDepression(Long depressionId) {
-        depressionRepository.deleteById(depressionId);
+        Diary diary = getDepression(depressionId).getDiary();
+        diary.changeDepression(null);
     }
 
 
@@ -55,6 +57,8 @@ public class DepressionService {
         // AI가 반환했다고 침
         Depression depression = new Depression();
         depression.update("AI가 해줄거임", 10.0, 10.0, 10.0);
+        // 연관관계 설정 전에 저장
+        saveDepression(depression);
         diary.changeDepression(depression);
         return depression;
     }

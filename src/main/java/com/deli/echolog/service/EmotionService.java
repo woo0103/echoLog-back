@@ -27,12 +27,10 @@ public class EmotionService {
                 .orElseThrow(() -> new EmotionNotFoundException("emotion not found"));
     }
 
-    // 감정 저장
-    @Transactional
-    public Emotion createEmotion(Diary diary) {
-        Emotion emotion = analyzeEmotion(diary);
-        return emotionRepository.save(emotion);
 
+    // 감정 분석 정보 넘어온 거 그대로 저장
+    public Emotion saveEmotion(Emotion emotion) {
+        return emotionRepository.save(emotion);
     }
 
     // 감정 수정
@@ -46,21 +44,22 @@ public class EmotionService {
     // 감정 삭제
     @Transactional
     public void deleteEmotion(Long emotionId) {
-        emotionRepository.deleteById(emotionId);
+        Emotion deleteEmotion = getEmotion(emotionId);
+        deleteEmotion.getDiary().changeEmotion(null);
     }
 
 
     // 감정 분석
     @Transactional
     public Emotion analyzeEmotion(Diary diary) {
-
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침
         // 지금은 임의로 반환
         Emotion emotion = new Emotion();
         emotion.update(EmotionType.ANGRY, 10.0);
+        // 연관관계 설정 전에 저장
+        saveEmotion(emotion);
         diary.changeEmotion(emotion);
-        diaryRepository.save(diary);
         return emotion;
     }
 }

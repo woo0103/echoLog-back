@@ -31,22 +31,22 @@ public class Diary {
     private LocalDateTime updateDate;
 
     // 변환된 일기
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "transform_diary_id")
     private TransformDiary transformDiary;
 
     // 감정 분석
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "emotion_id")
     private Emotion emotion;
 
     // 일기 피드백
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "diary_feedback_id")
     private DiaryFeedback diaryFeedback;
 
     // 우울증 분석
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "depression_id")
     private Depression depression;
 
@@ -59,22 +59,26 @@ public class Diary {
 
     // member랑 연관관계 설정
     public void setMember(Member member) {
-
         this.member = member;
-        member.getDiaries().add(this);
+        if (member != null) {
+            member.getDiaries().add(this);
+        }
     }
 
     // depression이랑 연관관계 설정
     public void changeDepression(Depression depression) {
-
         this.depression = depression;
-        depression.changeDiary(this);
+        if (depression != null) {
+            depression.changeDiary(this);
+        }
     }
 
     // emotion이랑 연관관계 설정
     public void changeEmotion(Emotion emotion) {
         this.emotion = emotion;
-        emotion.changeDiary(this);
+        if (emotion != null) {
+            emotion.changeDiary(this);
+        }
     }
 
     // 수정 할때 사용

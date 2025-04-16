@@ -3,6 +3,7 @@ package com.deli.echolog.service;
 import com.deli.echolog.domain.Depression;
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.Emotion;
+import com.deli.echolog.domain.Member;
 import com.deli.echolog.exception.DiaryNotFoundException;
 import com.deli.echolog.repository.DiaryRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class DiaryService {
 
     // 생성자 주입
+    private final MemberService memberService;
     private final DiaryRepository diaryRepository;
     private final DepressionService depressionService;
     private final EmotionService emotionService;
@@ -35,15 +37,39 @@ public class DiaryService {
     }
 
     // 일기 저장
+    // 저장 기능만 하니까 save로 함
     @Transactional
-    public Diary createDiary(Diary diary) {
+    public Diary saveDiary(Diary diary) {
 
         // 저장 먼저(영속성 컨텍스에 diary 넣어야 분석 가능)
-        Diary saveDiary = diaryRepository.save(diary);
+        return diaryRepository.save(diary);
+    }
 
-        // 일기 분석
-        analyzeDiary(diary);
-        return saveDiary;
+    // 일기 생성
+    /**
+     * 일기 내용 분석 후 연관관계까지 설정해서 반환하는 메서드임
+     * @param temp 임시저장여부
+     * @param memberId 일기 쓴 회원 아이디
+     * @param content 일기 내용
+     * @return 생성된 일기
+     */
+    @Transactional
+    public Diary createDiary(boolean temp, Long memberId, String content) {
+        // 회원 찾아옴
+        Member member = memberService.getMember(memberId);
+        // 일기 내요 저장
+        Diary diary = new Diary(content);
+        // 연관관계 설정하기 전에 일기 영속성 컨텍스트에 넣음
+        saveDiary(diary);
+        // member랑 연관관계 설정
+        diary.setMember(member);
+
+        // 임시 저장이 아니면 분석 진행
+        if (!temp) {
+            analyzeDiary(diary);
+        }
+
+        return diary;
     }
 
 
@@ -74,10 +100,8 @@ public class DiaryService {
     @Transactional
     public void analyzeDiary(Diary diary) {
         // 분석 후 연관관계까지 설정
-        Emotion emotion = emotionService.createEmotion(diary);
-        Depression depression = depressionService.createDepression(diary);
-
-
+        Emotion emotion = emotionService.analyzeEmotion(diary);
+        Depression depression = depressionService.analyzeDepression(diary);
     }
 
 }

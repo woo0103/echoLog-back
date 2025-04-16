@@ -64,24 +64,14 @@ public class DiaryController {
     // 일기 저장
     @PostMapping
     public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto) {
-        Member member = memberService.getMember(diaryCreateRequestDto.getMemberId());
-        // 일기 내용 넣음
-        Diary diary = new Diary(diaryCreateRequestDto.getContent());
 
-        // 일기 저장
-        Diary savedDiary = diaryService.createDiary(diary);
+        Long memberId = diaryCreateRequestDto.getMemberId();
+        String content = diaryCreateRequestDto.getContent();
 
-        // member랑 연관관계 설정
-        diary.setMember(member);
-
-        // 임시 저장이 아니면 분석함
-        if (!temp) {
-            // 일기 분석함
-            diaryService.analyzeDiary(diary);
-        }
+        Diary diary = diaryService.createDiary(temp, memberId, content);
 
         // Dto로 변환하고 반환
-        return ResponseEntity.ok(DiaryResponseDto.from(savedDiary));
+        return ResponseEntity.ok(DiaryResponseDto.from(diary));
     }
 
     // 일기 수정

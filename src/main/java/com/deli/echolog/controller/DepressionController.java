@@ -37,7 +37,7 @@ public class DepressionController {
         // 일기 찾아옴
         Diary diary = diaryService.getDiary(diaryId);
         // 일기에 대한 우울증 분석 생성
-        Depression depression = depressionService.createDepression(diary);
+        Depression depression = depressionService.analyzeDepression(diary);
         // 우울증 분석 결과 반환
         return ResponseEntity.ok(DepressionResponseDto.from(depression));
     }

@@ -35,7 +35,7 @@ public class EmotionController {
         // 일기 찾아옴
         Diary diary = diaryService.getDiary(diaryId);
         // 감정 분석함
-        Emotion emotion = emotionService.createEmotion(diary);
+        Emotion emotion = emotionService.analyzeEmotion(diary);
         // 감정 반환
         return ResponseEntity.ok(EmotionResponseDto.from(emotion));
     }

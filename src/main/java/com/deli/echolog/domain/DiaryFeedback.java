@@ -37,6 +37,11 @@ public class DiaryFeedback {
         this.diary = diary;
     }
 
+    public void update(String content, UserReaction userReaction) {
+        this.content = content;
+        this.userReaction = userReaction;
+    }
+
     @PrePersist
     protected void onCreate() {
         if (this.createDate == null) {

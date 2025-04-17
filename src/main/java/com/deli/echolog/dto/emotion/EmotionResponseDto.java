@@ -9,12 +9,13 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 public class EmotionResponseDto {
+    private Long emotionId;
     private EmotionType emotionType;
     private Double intensity;
 
     public static EmotionResponseDto from(Emotion emotion) {
         return new EmotionResponseDto(
-                emotion.getEmotionType(), emotion.getIntensity()
+                emotion.getId(), emotion.getEmotionType(), emotion.getIntensity()
         );
     }
 }

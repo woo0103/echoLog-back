@@ -33,6 +33,10 @@ public class DiaryFeedback {
     // 최종 수정일
     private LocalDateTime updateDate;
 
+    public void changeDiary(Diary diary) {
+        this.diary = diary;
+    }
+
     @PrePersist
     protected void onCreate() {
         if (this.createDate == null) {

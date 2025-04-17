@@ -65,19 +65,36 @@ public class Diary {
         }
     }
 
-    // depression이랑 연관관계 설정
-    public void changeDepression(Depression depression) {
-        this.depression = depression;
-        if (depression != null) {
-            depression.changeDiary(this);
+    // transformDiary랑 연관관계 설정
+    public void changeTransformDiary(TransformDiary transformDiary) {
+        this.transformDiary = transformDiary;
+        if (transformDiary != null) {
+            transformDiary.changeDiary(this);
         }
     }
+
 
     // emotion이랑 연관관계 설정
     public void changeEmotion(Emotion emotion) {
         this.emotion = emotion;
         if (emotion != null) {
             emotion.changeDiary(this);
+        }
+    }
+
+    // diaryFeedback랑 연관관계 설정
+    public void changeDiaryFeedback(DiaryFeedback diaryFeedback) {
+        this.diaryFeedback = diaryFeedback;
+        if (diaryFeedback != null) {
+            diaryFeedback.changeDiary(this);
+        }
+    }
+
+    // depression이랑 연관관계 설정
+    public void changeDepression(Depression depression) {
+        this.depression = depression;
+        if (depression != null) {
+            depression.changeDiary(this);
         }
     }
 

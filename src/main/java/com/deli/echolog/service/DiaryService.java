@@ -1,9 +1,6 @@
 package com.deli.echolog.service;
 
-import com.deli.echolog.domain.Depression;
-import com.deli.echolog.domain.Diary;
-import com.deli.echolog.domain.Emotion;
-import com.deli.echolog.domain.Member;
+import com.deli.echolog.domain.*;
 import com.deli.echolog.exception.DiaryNotFoundException;
 import com.deli.echolog.repository.DiaryRepository;
 import lombok.AllArgsConstructor;
@@ -21,8 +18,10 @@ public class DiaryService {
     // 생성자 주입
     private final MemberService memberService;
     private final DiaryRepository diaryRepository;
-    private final DepressionService depressionService;
+    private final TransformDiaryService transformDiaryService;
     private final EmotionService emotionService;
+
+    private final DepressionService depressionService;
 
     // 일기 조회
     public Diary getDiary(Long diaryId) {
@@ -100,6 +99,7 @@ public class DiaryService {
     @Transactional
     public void analyzeDiary(Diary diary) {
         // 분석 후 연관관계까지 설정
+        TransformDiary transformDiary = transformDiaryService.transform(diary);
         Emotion emotion = emotionService.analyzeEmotion(diary);
         Depression depression = depressionService.analyzeDepression(diary);
     }

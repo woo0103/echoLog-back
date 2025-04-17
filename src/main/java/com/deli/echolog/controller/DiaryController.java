@@ -26,7 +26,6 @@ public class DiaryController {
 
     // 생성자 주입
     private final DiaryService diaryService;
-    private final MemberService memberService;
 
     // 일기 단건 조회
     @GetMapping("/{diaryId}")
@@ -68,6 +67,7 @@ public class DiaryController {
         Long memberId = diaryCreateRequestDto.getMemberId();
         String content = diaryCreateRequestDto.getContent();
 
+        // 일기 생성 분석까지 해줌
         Diary diary = diaryService.createDiary(temp, memberId, content);
 
         // Dto로 변환하고 반환

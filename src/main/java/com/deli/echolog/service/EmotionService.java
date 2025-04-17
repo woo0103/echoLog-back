@@ -14,13 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class EmotionService {
 
     // 생성자 주입
     private final EmotionRepository emotionRepository;
     private final DiaryRepository diaryRepository;
 
+    @Transactional(readOnly = true)
     // 감정 조회
     public Emotion getEmotion(Long emotionId) {
         return emotionRepository.findById(emotionId)
@@ -34,7 +35,6 @@ public class EmotionService {
     }
 
     // 감정 수정
-    @Transactional
     public Emotion updateEmotion(Long emotionId, EmotionType emotionType, Double intensity) {
         Emotion emotion = getEmotion(emotionId);
         emotion.update(emotionType, intensity);
@@ -42,7 +42,6 @@ public class EmotionService {
     }
 
     // 감정 삭제
-    @Transactional
     public void deleteEmotion(Long emotionId) {
         Emotion deleteEmotion = getEmotion(emotionId);
         deleteEmotion.getDiary().changeEmotion(null);
@@ -50,7 +49,6 @@ public class EmotionService {
 
 
     // 감정 분석
-    @Transactional
     public Emotion analyzeEmotion(Diary diary) {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침
@@ -58,8 +56,8 @@ public class EmotionService {
         Emotion emotion = new Emotion();
         emotion.update(EmotionType.ANGRY, 10.0);
         // 연관관계 설정 전에 저장
-        saveEmotion(emotion);
-        diary.changeEmotion(emotion);
-        return emotion;
+        Emotion saved = saveEmotion(emotion);
+        diary.changeEmotion(saved);
+        return saved;
     }
 }

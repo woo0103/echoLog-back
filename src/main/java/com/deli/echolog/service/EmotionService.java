@@ -53,6 +53,8 @@ public class EmotionService {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침
         // 지금은 임의로 반환
+        // 변환된 일기 내용
+
         Emotion emotion = new Emotion();
         emotion.update(EmotionType.ANGRY, 10.0);
         // 연관관계 설정 전에 저장

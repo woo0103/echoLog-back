@@ -44,6 +44,8 @@ public class DiaryFeedbackService {
     // 분석
     public DiaryFeedback generateFeedback(Diary diary) {
         // AI가 어쩌구
+        // content, emotionType
+        // 수치 4개
         DiaryFeedback diaryFeedback = new DiaryFeedback();
         diaryFeedback.update("그래그래 참 잘했구나", UserReaction.LIKE);
 

@@ -44,6 +44,7 @@ public class TransformDiaryService {
     // 변환된 일기 분석
     public TransformDiary transform(Diary diary) {
         // AI가 어쩌구
+        // content -> content
         TransformDiary transformDiary = new TransformDiary();
         transformDiary.update("오늘 하루 어쩌구");
 

@@ -20,7 +20,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final TransformDiaryService transformDiaryService;
     private final EmotionService emotionService;
-
+    private final DiaryFeedbackService diaryFeedbackService;
     private final DepressionService depressionService;
 
     // 일기 조회
@@ -101,6 +101,7 @@ public class DiaryService {
         // 분석 후 연관관계까지 설정
         TransformDiary transformDiary = transformDiaryService.transform(diary);
         Emotion emotion = emotionService.analyzeEmotion(diary);
+        DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
         Depression depression = depressionService.analyzeDepression(diary);
     }
 

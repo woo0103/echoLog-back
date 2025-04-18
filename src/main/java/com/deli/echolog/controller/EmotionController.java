@@ -21,6 +21,7 @@ public class EmotionController {
     private final EmotionService emotionService;
     private final DiaryService diaryService;
 
+    // 감정 조회
     @GetMapping("/{emotionId}")
     public ResponseEntity<EmotionResponseDto> getEmotion(@PathVariable Long emotionId) {
         // 감정 찾아옴

@@ -2,6 +2,7 @@ package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Depression;
 import com.deli.echolog.domain.Diary;
+import com.deli.echolog.domain.EmotionType;
 import com.deli.echolog.exception.DepressionNotFoundException;
 import com.deli.echolog.exception.DiaryNotFoundException;
 import com.deli.echolog.repository.DepressionRepository;
@@ -52,6 +53,8 @@ public class DepressionService {
     public Depression analyzeDepression(Diary diary) {
         // AI 연결해서 분석하는 로직
         // AI가 반환했다고 침
+        EmotionType emotionType = diary.getEmotion().getEmotionType();
+        String transformContent = diary.getTransformDiary().getContent();
         Depression depression = new Depression();
         depression.update("AI가 해줄거임", 10.0, 10.0, 10.0);
         // 연관관계 설정 전에 저장

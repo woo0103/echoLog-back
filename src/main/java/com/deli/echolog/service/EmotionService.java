@@ -54,6 +54,7 @@ public class EmotionService {
         // AI가 반환했다고 침
         // 지금은 임의로 반환
         // 변환된 일기 내용
+        String transformContent = diary.getTransformDiary().getContent();
 
         Emotion emotion = new Emotion();
         emotion.update(EmotionType.ANGRY, 10.0);

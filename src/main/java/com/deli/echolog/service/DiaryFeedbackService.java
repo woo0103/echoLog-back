@@ -2,6 +2,7 @@ package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.DiaryFeedback;
+import com.deli.echolog.domain.EmotionType;
 import com.deli.echolog.domain.UserReaction;
 import com.deli.echolog.exception.DiaryFeedbackNotFoundException;
 import com.deli.echolog.repository.DiaryFeedbackRepository;
@@ -46,6 +47,8 @@ public class DiaryFeedbackService {
         // AI가 어쩌구
         // content, emotionType
         // 수치 4개
+        EmotionType emotionType = diary.getEmotion().getEmotionType();
+        String transformContent = diary.getTransformDiary().getContent();
         DiaryFeedback diaryFeedback = new DiaryFeedback();
         diaryFeedback.update("그래그래 참 잘했구나", UserReaction.LIKE);
 

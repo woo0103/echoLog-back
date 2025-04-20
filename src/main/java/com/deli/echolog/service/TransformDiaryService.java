@@ -45,6 +45,7 @@ public class TransformDiaryService {
     public TransformDiary transform(Diary diary) {
         // AI가 어쩌구
         // content -> content
+        String content = diary.getContent();
         TransformDiary transformDiary = new TransformDiary();
         transformDiary.update("오늘 하루 어쩌구");
 

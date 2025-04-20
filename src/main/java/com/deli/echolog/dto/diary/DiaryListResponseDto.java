@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 public class DiaryListResponseDto {
 
     private Long diaryId;
-    private LocalDateTime createDate;
+    private LocalDate writtenDate;
     private EmotionType emotionType;
 
     /**
@@ -32,7 +33,7 @@ public class DiaryListResponseDto {
         EmotionType emotionType = (emotion != null) ? emotion.getEmotionType() : null;
 
         return new DiaryListResponseDto(
-                diary.getId(), diary.getCreateDate(), emotionType
+                diary.getId(), diary.getWrittenDate(), emotionType
         );
     }
 }

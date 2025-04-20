@@ -32,11 +32,9 @@ public class Depression {
     // phq9 점수
     private double phq9Score;
 
-    // 생성일자
-    private LocalDateTime createDate;
-
-    // 최종 수정일
-    private LocalDateTime updateDate;
+    // 생성, 수정일자
+    @Embedded
+    private BaseTime baseTime = new BaseTime();
 
     public void changeDiary(Diary diary) {
         this.diary = diary;
@@ -49,12 +47,4 @@ public class Depression {
         this.phq9Score = phq9Score;
     }
 
-
-
-    @PrePersist
-    protected void onCreate() {
-        if (this.createDate == null) {
-            this.createDate = LocalDateTime.now();
-        }
-    }
 }

@@ -36,13 +36,12 @@ public class Member {
     private String phone;
 
     // 작성한 일기 목록
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Diary> diaries = new ArrayList<>();
 
-    // 생성일자
-    private LocalDateTime createDate;
-    // 최종 수정일
-    private LocalDateTime updateDate;
+    // 생성, 수정일자
+    @Embedded
+    private BaseTime baseTime = new BaseTime();
 
     public Member() {
     }
@@ -56,15 +55,12 @@ public class Member {
         this.phone = phone;
     }
 
-    // 생성일자 넣는거
-    @PrePersist
-    protected void onCreate() {
-        if (this.createDate == null) {
-            this.createDate = LocalDateTime.now();
-        }
+    public void update(String name, String password, LocalDate birthDate, String phone) {
+        this.name = name;
+        this.password = password;
+        this.birthDate = birthDate;
+        this.phone = phone;
     }
-
-
 
 
 }

@@ -8,17 +8,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberService {
 
     // 생성자 주입
     private final MemberRepository memberRepository;
 
     // 회원 조회
+    @Transactional(readOnly = true)
     public Member getMember(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("member not found"));
@@ -30,13 +32,18 @@ public class MemberService {
     }
 
     // 회원 가입
-    @Transactional
     public Member createMember(Member member) {
         return memberRepository.save(member);
     }
 
+    // 회원 정보 수정
+    public Member updapteMember(Long memberId, String name, String password, LocalDate birthDate, String phone) {
+        Member member = getMember(memberId);
+        member.update(name, password, birthDate, phone);
+        return member;
+    }
+
     // 회원 탈퇴
-    @Transactional
     public void deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
     }

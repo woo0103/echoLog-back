@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -53,11 +54,11 @@ public class DiaryService {
      * @return 생성된 일기
      */
     @Transactional
-    public Diary createDiary(boolean temp, Long memberId, String content) {
+    public Diary createDiary(boolean temp, Long memberId, String content, LocalDate writtenDate) {
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
         // 일기 내요 저장
-        Diary diary = new Diary(content);
+        Diary diary = new Diary(content,writtenDate);
         // 연관관계 설정하기 전에 일기 영속성 컨텍스트에 넣음
         saveDiary(diary);
         // member랑 연관관계 설정

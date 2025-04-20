@@ -24,10 +24,9 @@ public class Emotion {
     private EmotionType emotionType;
     // 감정 강도
     private Double intensity;
-    // 생성일자
-    private LocalDateTime createDate;
-    // 최종 수정일
-    private LocalDateTime updateDate;
+    // 생성, 수정일자
+    @Embedded
+    private BaseTime baseTime = new BaseTime();
 
     public void update(EmotionType emotionType, Double intensity) {
         this.emotionType = emotionType;
@@ -38,10 +37,4 @@ public class Emotion {
         this.diary = diary;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        if (this.createDate == null) {
-            this.createDate = LocalDateTime.now();
-        }
-    }
 }

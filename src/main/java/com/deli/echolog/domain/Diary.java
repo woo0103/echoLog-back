@@ -3,6 +3,7 @@ package com.deli.echolog.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,10 +26,12 @@ public class Diary {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    // 생성일자
-    private LocalDateTime createDate;
-    // 최종 수정일
-    private LocalDateTime updateDate;
+    // 사용자가 선택한 일기 날짜
+    private LocalDate writtenDate;
+
+    // 생성, 수정일자
+    @Embedded
+    private BaseTime baseTime = new BaseTime();
 
     // 변환된 일기
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -53,8 +56,9 @@ public class Diary {
     public Diary() {
     }
 
-    public Diary(String content) {
+    public Diary(String content, LocalDate writtenDate) {
         this.content = content;
+        this.writtenDate = writtenDate;
     }
 
     // member랑 연관관계 설정
@@ -101,14 +105,7 @@ public class Diary {
     // 수정 할때 사용
     public void update(String content) {
         this.content = content;
-        updateDate = LocalDateTime.now();
     }
 
-    @PrePersist
-    protected void onCreate() {
-        if (this.createDate == null) {
-            this.createDate = LocalDateTime.now();
-        }
-    }
 }
 

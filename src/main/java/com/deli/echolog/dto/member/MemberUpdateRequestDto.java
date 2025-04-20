@@ -1,0 +1,16 @@
+package com.deli.echolog.dto.member;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+public class MemberUpdateRequestDto {
+    private String name;
+    private String password;
+    private LocalDate birthDate;
+    private String phone;
+
+}

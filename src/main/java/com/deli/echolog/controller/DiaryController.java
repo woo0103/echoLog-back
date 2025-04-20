@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,9 +67,10 @@ public class DiaryController {
 
         Long memberId = diaryCreateRequestDto.getMemberId();
         String content = diaryCreateRequestDto.getContent();
+        LocalDate writtenDate = diaryCreateRequestDto.getWrittenDate();
 
         // 일기 생성 분석까지 해줌
-        Diary diary = diaryService.createDiary(temp, memberId, content);
+        Diary diary = diaryService.createDiary(temp, memberId, content, writtenDate);
 
         // Dto로 변환하고 반환
         return ResponseEntity.ok(DiaryResponseDto.from(diary));

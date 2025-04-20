@@ -22,10 +22,9 @@ public class TransformDiary {
     // 변환된 일기 내용
     @Column(columnDefinition = "TEXT")
     private String content;
-    // 생성일자
-    private LocalDateTime createDate;
-    // 최종 수정일
-    private LocalDateTime updateDate;
+    // 생성, 수정일자
+    @Embedded
+    private BaseTime baseTime = new BaseTime();
 
     public void changeDiary(Diary diary) {
         this.diary = diary;
@@ -35,11 +34,5 @@ public class TransformDiary {
         this.content = content;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        if (this.createDate == null) {
-            this.createDate = LocalDateTime.now();
-        }
-    }
 
 }

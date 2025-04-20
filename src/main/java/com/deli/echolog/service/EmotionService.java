@@ -37,7 +37,7 @@ public class EmotionService {
     // 감정 수정
     public Emotion updateEmotion(Long emotionId, EmotionType emotionType, Double intensity) {
         Emotion emotion = getEmotion(emotionId);
-        emotion.update(emotionType, intensity);
+        emotion.update(emotionType);
         return emotion;
     }
 
@@ -57,7 +57,7 @@ public class EmotionService {
         String transformContent = diary.getTransformDiary().getContent();
 
         Emotion emotion = new Emotion();
-        emotion.update(EmotionType.ANGRY, 10.0);
+        emotion.update(EmotionType.ANGRY);
         // 연관관계 설정 전에 저장
         Emotion saved = saveEmotion(emotion);
         diary.changeEmotion(saved);

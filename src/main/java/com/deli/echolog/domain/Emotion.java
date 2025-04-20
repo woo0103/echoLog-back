@@ -22,15 +22,13 @@ public class Emotion {
     // 감정 타입(6개중 하나)
     @Enumerated(EnumType.STRING)
     private EmotionType emotionType;
-    // 감정 강도
-    private Double intensity;
+
     // 생성, 수정일자
     @Embedded
     private BaseTime baseTime = new BaseTime();
 
-    public void update(EmotionType emotionType, Double intensity) {
+    public void update(EmotionType emotionType) {
         this.emotionType = emotionType;
-        this.intensity = intensity;
     }
 
     public void changeDiary(Diary diary) {

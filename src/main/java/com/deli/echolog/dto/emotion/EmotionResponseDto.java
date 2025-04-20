@@ -11,11 +11,10 @@ import lombok.Setter;
 public class EmotionResponseDto {
     private Long emotionId;
     private EmotionType emotionType;
-    private Double intensity;
 
     public static EmotionResponseDto from(Emotion emotion) {
         return new EmotionResponseDto(
-                emotion.getId(), emotion.getEmotionType(), emotion.getIntensity()
+                emotion.getId(), emotion.getEmotionType()
         );
     }
 }

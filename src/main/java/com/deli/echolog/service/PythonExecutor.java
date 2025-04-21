@@ -14,7 +14,7 @@ public class PythonExecutor {
      * @param inputJson  파이썬으로 전달할 JSON 문자열
      * @return 파이썬에서 반환한 stdout 문자열
      */
-    public static String execute(String scriptName, String inputJson) throws IOException, InterruptedException {
+    public static String execute(String scriptName, String input) throws IOException, InterruptedException {
         File scriptFile = extractPythonScript(scriptName);
 
         ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath());
@@ -24,7 +24,7 @@ public class PythonExecutor {
 
         // stdin으로 JSON 전달
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()))) {
-            writer.write(inputJson);
+            writer.write(input);
             writer.flush();
         }
 

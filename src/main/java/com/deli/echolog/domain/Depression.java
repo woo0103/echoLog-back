@@ -32,6 +32,9 @@ public class Depression {
     // phq9 점수
     private double phq9Score;
 
+    // GAD-7 점수
+    private double gad7Score;
+
     // 생성, 수정일자
     @Embedded
     private BaseTime baseTime = new BaseTime();
@@ -40,11 +43,12 @@ public class Depression {
         this.diary = diary;
     }
 
-    public void update(String content, Double emotionScore, Double depressionWordScore, Double phq9Score) {
+    public void update(String content, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
         this.content = content;
         this.emotionScore = emotionScore;
         this.depressionWordScore = depressionWordScore;
         this.phq9Score = phq9Score;
+        this.gad7Score = gad7Score;
     }
 
 }

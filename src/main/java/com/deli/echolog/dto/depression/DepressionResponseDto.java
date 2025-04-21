@@ -15,10 +15,11 @@ public class DepressionResponseDto {
     private Double emotionScore;
     private Double depressionWordScore;
     private Double phq9Score;
+    private Double gad7Score;
 
     public static DepressionResponseDto from(Depression depression) {
         return new DepressionResponseDto(
-                depression.getId(), depression.getContent(), depression.getEmotionScore(), depression.getDepressionWordScore(), depression.getPhq9Score()
+                depression.getId(), depression.getContent(), depression.getEmotionScore(), depression.getDepressionWordScore(), depression.getPhq9Score(), depression.getGad7Score()
         );
 
     }

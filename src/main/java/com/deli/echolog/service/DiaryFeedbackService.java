@@ -4,14 +4,19 @@ import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.DiaryFeedback;
 import com.deli.echolog.domain.EmotionType;
 import com.deli.echolog.domain.UserReaction;
+import com.deli.echolog.dto.diaryFeedback.DiaryFeedbackJsonRequestDto;
+import com.deli.echolog.dto.diaryFeedback.DiaryFeedbackJsonResponseDto;
 import com.deli.echolog.exception.DiaryFeedbackNotFoundException;
 import com.deli.echolog.repository.DiaryFeedbackRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 @Transactional
 public class DiaryFeedbackService {
 
@@ -44,16 +49,32 @@ public class DiaryFeedbackService {
 
     // 분석
     public DiaryFeedback generateFeedback(Diary diary) {
-        // AI가 어쩌구
-        // content, emotionType
-        // 수치 4개
-        EmotionType emotionType = diary.getEmotion().getEmotionType();
-        String transformContent = diary.getTransformDiary().getContent();
-        DiaryFeedback diaryFeedback = new DiaryFeedback();
-        diaryFeedback.update("그래그래 참 잘했구나", UserReaction.LIKE);
+        try {
+            EmotionType emotionType = diary.getEmotion().getEmotionType();
+            String content = diary.getTransformDiary().getContent();
+            DiaryFeedbackJsonRequestDto diaryFeedbackJsonRequestDto = new DiaryFeedbackJsonRequestDto(emotionType, content);
 
-        DiaryFeedback saved = saveDiaryFeedback(diaryFeedback);
-        diary.changeDiaryFeedback(saved);
-        return saved;
+            ObjectMapper objectMapper = new ObjectMapper();
+            String inputJson = objectMapper.writeValueAsString(diaryFeedbackJsonRequestDto);
+            log.info("파이썬에 전달할 JSON: {}", inputJson);
+
+            String jsonOutput = PythonExecutor.execute("analyze_depression.py", inputJson);
+            log.info("파이썬으로부터 받은 결과: {}", jsonOutput);
+
+            DiaryFeedbackJsonResponseDto result = objectMapper.readValue(jsonOutput, DiaryFeedbackJsonResponseDto.class);
+            String feedback = result.getFeedback();
+
+            DiaryFeedback diaryFeedback = new DiaryFeedback();
+            diaryFeedback.update(feedback, null);
+
+            DiaryFeedback saved = saveDiaryFeedback(diaryFeedback);
+            diary.changeDiaryFeedback(saved);
+            return saved;
+        } catch (Exception e) {
+            log.error("우울증 분석 실패", e);
+            throw new RuntimeException("우울증 분석 중 예외 발생", e);
+        }
+
+
     }
 }

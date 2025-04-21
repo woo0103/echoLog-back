@@ -11,4 +11,5 @@ public class DepressionUpdateRequestDto {
     private Double emotionScore;
     private Double depressionWordScore;
     private Double phq9Score;
+    private Double gad7Score;
 }

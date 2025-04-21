@@ -48,7 +48,7 @@ public class DepressionController {
             , @RequestBody DepressionUpdateRequestDto depressionUpdateRequestDto) {
         // 수정함
         Depression depression = depressionService.updateDepression(depressionId, depressionUpdateRequestDto.getContent(), depressionUpdateRequestDto.getEmotionScore(),
-                depressionUpdateRequestDto.getDepressionWordScore(), depressionUpdateRequestDto.getPhq9Score());
+                depressionUpdateRequestDto.getDepressionWordScore(), depressionUpdateRequestDto.getPhq9Score(), depressionUpdateRequestDto.getGad7Score());
 
         return ResponseEntity.ok(DepressionResponseDto.from(depression));
     }

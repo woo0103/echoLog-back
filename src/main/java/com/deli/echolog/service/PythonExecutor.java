@@ -18,6 +18,8 @@ public class PythonExecutor {
         File scriptFile = extractPythonScript(scriptName);
 
         ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath());
+        builder.environment().put("PYTHONIOENCODING", "utf-8");
+
         Process process = builder.start();
 
         // stdin으로 JSON 전달

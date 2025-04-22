@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Setter
 // 일기 생성할 때 받는 dto
 public class DiaryCreateRequestDto {
-    private Long memberId;
     private String content;
     private LocalDate writtenDate;
 }

@@ -26,8 +26,15 @@ public class MemberService {
                 .orElseThrow(() -> new MemberNotFoundException("member not found"));
     }
 
+    @Transactional(readOnly = true)
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElse(null);
+    }
+
     // 전체 회원 조회
     public List<Member> getAllMembers() {
+
         return memberRepository.findAll();
     }
 

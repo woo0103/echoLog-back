@@ -8,6 +8,8 @@ import com.deli.echolog.dto.diary.DiaryResponseDto;
 import com.deli.echolog.dto.diary.DiaryUpdateRequestDto;
 import com.deli.echolog.service.DiaryService;
 import com.deli.echolog.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,11 @@ public class DiaryController {
 
     // 일기 목록 조회
     @GetMapping
-    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam("memberId") Long memberId) {
+    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(HttpServletRequest request) {
+        // 세션에서 가져옴
+        HttpSession session = request.getSession();
+        Long memberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
+
         // 일기 목록 가져옴
         List<Diary> diaries = diaryService.getAllDiaries(memberId);
 
@@ -63,9 +69,9 @@ public class DiaryController {
 
     // 일기 저장
     @PostMapping
-    public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto) {
+    public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto, HttpServletRequest request) {
 
-        Long memberId = diaryCreateRequestDto.getMemberId();
+        Long memberId = (Long) request.getSession().getAttribute("LOGIN_MEMBER_ID");
         String content = diaryCreateRequestDto.getContent();
         LocalDate writtenDate = diaryCreateRequestDto.getWrittenDate();
 
@@ -88,8 +94,10 @@ public class DiaryController {
     }
 
     // 일기 삭제
+    // 관리자용 (일단 주석)
     @DeleteMapping("/{diaryId}")
     public void deleteDiary(@PathVariable Long diaryId) {
         diaryService.deleteDiary(diaryId);
     }
+
 }

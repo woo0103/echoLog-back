@@ -6,6 +6,8 @@ import com.deli.echolog.dto.member.MemberCreateRequestDto;
 import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
 import com.deli.echolog.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -66,8 +68,18 @@ public class MemberController {
         );
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
-    @DeleteMapping("/{memberId}")
+
+    // 삭제
+    /*@DeleteMapping("/{memberId}")
     public void deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
+    }*/
+
+    @DeleteMapping()
+    public void deleteMember(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long memberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
+        memberService.deleteMember(memberId);
     }
+
 }

@@ -18,6 +18,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         // 세션 없거나 로그인 정보가 없으면 401 에러
         if (session == null || session.getAttribute("LOGIN_MEMBER_ID") == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setCharacterEncoding("UTF-8");
             response.getWriter().write("로그인이 필요합니다.");
             return false;
         }

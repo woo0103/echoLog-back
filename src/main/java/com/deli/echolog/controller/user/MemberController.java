@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.dto.diary.DiaryListResponseDto;
@@ -28,14 +28,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 회원 조회(관리자)
-    @GetMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId) {
-        // 회원 찾아옴
-        Member member = memberService.getMember(memberId);
-        // Dto로 변환 후 반환
-        return ResponseEntity.ok(MemberResponseDto.from(member));
-    }
 
     // 회원 조회 (사용자)
     @GetMapping("/me")
@@ -47,7 +39,7 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 회원 목록 조회 (관리자)
+    // 회원 목록 조회
     @GetMapping
     public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
         List<Member> members = memberService.getAllMembers();
@@ -63,7 +55,7 @@ public class MemberController {
 
     }
 
-    // 회원 가입 (사용자)
+    // 회원 가입
     @PostMapping
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberCreateRequestDto memberCreateRequestDto) {
         Member member = memberCreateRequestDto.toEntity();
@@ -71,17 +63,7 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 회원 정보 수정 (관리자)
-    @PutMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
-        // 정보 수정
-        Member member = memberService.updapteMember(
-                memberId, memberUpdateRequestDto.getName(), memberUpdateRequestDto.getPassword(), memberUpdateRequestDto.getBirthDate(), memberUpdateRequestDto.getPhone()
-        );
-        return ResponseEntity.ok(MemberResponseDto.from(member));
-    }
-
-    // 회원 정보 수정 (사용자)
+    // 회원 정보 수정
     @PutMapping()
     public ResponseEntity<MemberResponseDto> updateMember(HttpServletRequest request, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
         // 세션에서 찾아옴
@@ -95,13 +77,7 @@ public class MemberController {
     }
 
 
-    // 회원 삭제 (관리자)
-    @DeleteMapping("/{memberId}")
-    public void deleteMember(@PathVariable Long memberId) {
-        memberService.deleteMember(memberId);
-    }
-
-    // 회원 삭제 (사용자)
+    // 회원 삭제
     @DeleteMapping()
     public void deleteMember(HttpServletRequest request) {
         Long memberId = getMemberIdFromSession(request);

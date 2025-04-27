@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.Member;
@@ -30,7 +30,7 @@ public class DiaryController {
     // 생성자 주입
     private final DiaryService diaryService;
 
-    // 일기 단건 조회 (사용자, 관리자)
+    // 일기 단건 조회
     @GetMapping("/{diaryId}")
     public ResponseEntity<DiaryResponseDto> getDiary(@PathVariable Long diaryId) {
 
@@ -41,30 +41,8 @@ public class DiaryController {
         return ResponseEntity.ok(DiaryResponseDto.from(diary));
     }
 
-    // 일기 목록 조회 (관리자)
-//    @GetMapping
-//    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam Long memberId) {
-//
-//        // 일기 목록 가져옴
-//        List<Diary> diaries = diaryService.getAllDiaries(memberId);
-//
-//        // 일기 없으면 빈 리스트 넣어줌(null 체크)
-//        if (diaries == null) {
-//            diaries = new ArrayList<>();
-//        }
-//
-//        // 일기 리스트를 Dto 리스트로 변환
-//        List<DiaryListResponseDto> responseDiaries = new ArrayList<>();
-//        for (Diary diary : diaries) {
-//            responseDiaries.add(DiaryListResponseDto.from(diary));
-//        }
-//
-//        Map<String, List<DiaryListResponseDto>> response = new HashMap<>();
-//        response.put("diaries", responseDiaries);
-//        return ResponseEntity.ok(response);
-//    }
 
-    // 일기 목록 조회 (사용자)
+    // 일기 목록 조회
     @GetMapping
     public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(HttpServletRequest request) {
         // 세션에서 가져옴
@@ -89,7 +67,7 @@ public class DiaryController {
         return ResponseEntity.ok(response);
     }
 
-    // 일기 저장 (사용자)
+    // 일기 저장
     @PostMapping
     public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto, HttpServletRequest request) {
 
@@ -104,7 +82,7 @@ public class DiaryController {
         return ResponseEntity.ok(DiaryResponseDto.from(diary));
     }
 
-    // 일기 수정 (사용자, 관리자)
+    // 일기 수정
     @PutMapping("/{diaryId}")
     public ResponseEntity<DiaryResponseDto> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryUpdateRequestDto diaryUpdateRequestDto) {
         // 일기 수정
@@ -115,7 +93,7 @@ public class DiaryController {
         return ResponseEntity.ok(DiaryResponseDto.from(diary));
     }
 
-    // 일기 삭제 (사용자, 관리자)
+    // 일기 삭제
     @DeleteMapping("/{diaryId}")
     public void deleteDiary(@PathVariable Long diaryId) {
         diaryService.deleteDiary(diaryId);

@@ -5,6 +5,7 @@ import com.deli.echolog.dto.diary.DiaryListResponseDto;
 import com.deli.echolog.dto.member.MemberCreateRequestDto;
 import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
+import com.deli.echolog.service.LoginService;
 import com.deli.echolog.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -27,7 +28,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 회원 조회
+    // 회원 조회(관리자)
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId) {
         // 회원 찾아옴
@@ -36,6 +37,17 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
+    // 회원 조회 (사용자)
+    @GetMapping("/me")
+    public ResponseEntity<MemberResponseDto> getMember(HttpServletRequest request) {
+        Long memberId = getMemberIdFromSession(request);
+        // 회원 찾아옴
+        Member member = memberService.getMember(memberId);
+        // Dto로 변환 후 반환
+        return ResponseEntity.ok(MemberResponseDto.from(member));
+    }
+
+    // 회원 목록 조회 (관리자)
     @GetMapping
     public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
         List<Member> members = memberService.getAllMembers();
@@ -51,7 +63,7 @@ public class MemberController {
 
     }
 
-    // 회원 가입
+    // 회원 가입 (사용자)
     @PostMapping
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberCreateRequestDto memberCreateRequestDto) {
         Member member = memberCreateRequestDto.toEntity();
@@ -59,7 +71,7 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 회원 정보 수정
+    // 회원 정보 수정 (관리자)
     @PutMapping("/{memberId}")
     public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
         // 정보 수정
@@ -69,17 +81,41 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 삭제
-    /*@DeleteMapping("/{memberId}")
+    // 회원 정보 수정 (사용자)
+    @PutMapping()
+    public ResponseEntity<MemberResponseDto> updateMember(HttpServletRequest request, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+        // 세션에서 찾아옴
+        Long memberId = getMemberIdFromSession(request);
+
+        // 정보 수정
+        Member member = memberService.updapteMember(
+                memberId, memberUpdateRequestDto.getName(), memberUpdateRequestDto.getPassword(), memberUpdateRequestDto.getBirthDate(), memberUpdateRequestDto.getPhone()
+        );
+        return ResponseEntity.ok(MemberResponseDto.from(member));
+    }
+
+
+    // 회원 삭제 (관리자)
+    @DeleteMapping("/{memberId}")
     public void deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
-    }*/
+    }
 
+    // 회원 삭제 (사용자)
     @DeleteMapping()
     public void deleteMember(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Long memberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
+        Long memberId = getMemberIdFromSession(request);
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
         memberService.deleteMember(memberId);
+    }
+
+    // 세션에서 memberId 찾아오는 메서드임
+    private Long getMemberIdFromSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return (Long) session.getAttribute("LOGIN_MEMBER_ID");
     }
 
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,20 +15,13 @@ public class DiaryResponseDto {
     private Long diaryId;
     private Long memberId;
     private String content;
+    private LocalDate writtenDate;
     private Long transformDiaryId;
     private String transformContent;
     private Long emotionId;
     private Long diaryFeedbackId;
     private Long depressionId;
 
-
-
-
-    public DiaryResponseDto(Long diaryId, Long memberId, String content) {
-        this.diaryId = diaryId;
-        this.memberId = memberId;
-        this.content = content;
-    }
 
     /**
      * 일기를 Dto로 바꾸는 메서드임
@@ -49,7 +44,7 @@ public class DiaryResponseDto {
         Long depressionId = (depression != null) ? depression.getId() : null;
 
         return new DiaryResponseDto(
-                diary.getId(), diary.getMember().getId(), diary.getContent(), transformDiaryId,
+                diary.getId(), diary.getMember().getId(), diary.getContent(), diary.getWrittenDate(), transformDiaryId,
                 transformContent, emotionId, diaryFeedbackId, depressionId);
     }
 }

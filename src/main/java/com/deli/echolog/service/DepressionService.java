@@ -40,9 +40,9 @@ public class DepressionService {
     }
 
     // 우울증 분석 수정
-    public Depression updateDepression(Long depressionId, String content, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
+    public Depression updateDepression(Long depressionId, Boolean result, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
         Depression depression = getDepression(depressionId);
-        depression.update(content, emotionScore, depressionWordScore, phq9Score, gad7Score);
+        depression.update(result, emotionScore, depressionWordScore, phq9Score, gad7Score);
         return depression;
     }
 
@@ -74,18 +74,18 @@ public class DepressionService {
             double depressionWordScore = result.getDepressionWordScore();
             double phq9Score = result.getPhq9Score();
             double gad7Score = result.getGad7Score();
-            String depressionContent = "";
+            boolean analyzedResult;
 
             // 우울증 판단 로직(임의)
             if (emotionScore + depressionWordScore + phq9Score + gad7Score >= 20.0) {
-                depressionContent = "너 우울증";
+                analyzedResult = true;
             } else {
-                depressionContent = "너 정상!";
+                analyzedResult = false;
             }
 
             // 연관관계 설정 전에 저장
             Depression depression = new Depression();
-            depression.update(depressionContent, emotionScore, depressionWordScore, phq9Score, gad7Score);
+            depression.update(analyzedResult, emotionScore, depressionWordScore, phq9Score, gad7Score);
             Depression saved = saveDepression(depression);
             diary.changeDepression(saved);
             return saved;

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 // 우울증 분석 엔티티
 public class Depression {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "depression_id")
     private Long id;
 

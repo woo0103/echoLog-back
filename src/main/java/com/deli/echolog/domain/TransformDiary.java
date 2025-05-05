@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 // 변환된 일기 엔티티
 public class TransformDiary {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transform_diary_id")
     private Long id;
 

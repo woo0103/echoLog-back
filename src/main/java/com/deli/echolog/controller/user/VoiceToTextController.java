@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.dto.VoiceToTextResponseDto;
 import com.deli.echolog.service.VoiceToTextService;

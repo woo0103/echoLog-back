@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.dto.login.LoginRequestDto;

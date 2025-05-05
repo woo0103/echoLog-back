@@ -42,14 +42,19 @@ public class DiaryController {
     }
 
 
-    // 일기 목록 조회
+    // 모든 일기 목록 조회
     @GetMapping
-    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(HttpServletRequest request) {
+    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(HttpServletRequest request,  @RequestParam(required = false) Integer year, @RequestParam(required = false) Integer month) {
         // 세션에서 가져옴
         Long memberId = getMemberIdFromSession(request);
 
+        // year 또는 month가 null이면 현재 날짜 기준으로 설정
+        LocalDate now = LocalDate.now();
+        int resolvedYear = (year != null) ? year : now.getYear();
+        int resolvedMonth = (month != null) ? month : now.getMonthValue();
+
         // 일기 목록 가져옴
-        List<Diary> diaries = diaryService.getAllDiaries(memberId);
+        List<Diary> diaries = diaryService.getDiariesByMonth(memberId, resolvedYear, resolvedMonth);
 
         // 일기 없으면 빈 리스트 넣어줌(null 체크)
         if (diaries == null) {

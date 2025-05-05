@@ -40,7 +40,7 @@ public class DepressionService {
     }
 
     // 우울증 분석 수정
-    public Depression updateDepression(Long depressionId, Boolean result, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
+    public Depression updateDepression(Long depressionId, boolean result, double emotionScore, double depressionWordScore, double phq9Score, double gad7Score) {
         Depression depression = getDepression(depressionId);
         depression.update(result, emotionScore, depressionWordScore, phq9Score, gad7Score);
         return depression;

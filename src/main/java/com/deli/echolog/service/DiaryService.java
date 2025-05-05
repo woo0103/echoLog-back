@@ -36,6 +36,13 @@ public class DiaryService {
         return diaryRepository.findByMemberId(memberId);
     }
 
+    // 회원별 일기 월별 조회
+    public List<Diary> getDiariesByMonth(Long memberId, int year, int month) {
+        LocalDate start = LocalDate.of(year, month, 1);
+        LocalDate end = start.plusMonths(1).minusDays(1);
+        return diaryRepository.findByMemberIdAndWrittenDateBetween(memberId, start, end);
+    }
+
     // 일기 저장
     // 저장 기능만 하니까 save로 함
     @Transactional
@@ -44,6 +51,9 @@ public class DiaryService {
         // 저장 먼저(영속성 컨텍스에 diary 넣어야 분석 가능)
         return diaryRepository.save(diary);
     }
+
+
+
 
     // 일기 생성
     /**

@@ -20,7 +20,7 @@ public class Depression {
     private Diary diary;
 
     // 우울증 분석 내용
-    private Boolean result;
+    private boolean result;
 
     // 감정 점수
     private double emotionScore;
@@ -42,7 +42,7 @@ public class Depression {
         this.diary = diary;
     }
 
-    public void update(Boolean result, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
+    public void update(boolean result, double emotionScore, double depressionWordScore, double phq9Score, double gad7Score) {
         this.result = result;
         this.emotionScore = emotionScore;
         this.depressionWordScore = depressionWordScore;

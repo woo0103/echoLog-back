@@ -31,6 +31,11 @@ public class DiaryService {
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
     }
 
+    // 날짜로 일기 조회
+    public Diary getDiaryByWrittenDate(LocalDate writtenDate, Long memberId) {
+        return diaryRepository.findByWrittenDateAndMemberId(writtenDate, memberId);
+    }
+
     // 회원별 일기 목록 조회
     public List<Diary> getAllDiaries(Long memberId) {
         return diaryRepository.findByMemberId(memberId);
@@ -67,7 +72,15 @@ public class DiaryService {
     public Diary createDiary(boolean temp, Long memberId, String content, LocalDate writtenDate) {
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
-        // 일기 내요 저장
+        // 작성하는 날짜에 이미 일기가 있는지 확인함
+        Diary diaryByWrittenDate = getDiaryByWrittenDate(writtenDate, memberId);
+        // 있으면 삭제 후 생성
+        if (diaryByWrittenDate != null) {
+            deleteDiary(diaryByWrittenDate.getId());
+        }
+
+
+        // 일기 내용 저장
         Diary diary = new Diary(content,writtenDate);
         // 연관관계 설정하기 전에 일기 영속성 컨텍스트에 넣음
         saveDiary(diary);

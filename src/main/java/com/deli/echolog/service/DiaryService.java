@@ -48,6 +48,13 @@ public class DiaryService {
         return diaryRepository.findByMemberIdAndWrittenDateBetween(memberId, start, end);
     }
 
+    // 회원별 일기 14일치 조회
+    public List<Diary> getDiariesBy2weeks(Long memberId, LocalDate writtenDate) {
+        LocalDate start = writtenDate.minusDays(13);
+        LocalDate end = writtenDate;
+        return diaryRepository.findByMemberIdAndWrittenDateBetween(memberId, start, end);
+    }
+
     // 일기 저장
     // 저장 기능만 하니까 save로 함
     @Transactional

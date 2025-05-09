@@ -1,6 +1,7 @@
 package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Member;
+import com.deli.echolog.domain.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,22 @@ public class LoginService {
         }
 
 
+        return member;
+    }
+
+    public Member adminLogin(String email, String password) {
+        Member member = memberService.findByEmail(email);
+        if (member == null) {
+            throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
+        }
+
+        if (!member.getPassword().equals(password)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        if (member.getRole() != Role.ADMIN) {
+            throw new IllegalArgumentException("관리자 권환이 없습니다.");
+        }
         return member;
     }
 

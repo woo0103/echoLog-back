@@ -16,7 +16,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*") // 모든 경로 요청 허용
+                .allowedOriginPatterns(
+                        "http://localhost:[*]", // 로컬 개발 (모든 포트 허용)
+                        "https://your-app-domain.com", // 실제 배포 도메인
+                        "http://192.168.1.*" // 로컬 네트워크 테스트 (예: 모바일 기기)
+                ) // 모든 경로 요청 허용
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);

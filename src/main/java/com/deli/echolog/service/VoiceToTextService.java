@@ -19,6 +19,7 @@ public class VoiceToTextService {
 
     public String convert(MultipartFile voiceFile) {
         try {
+
             // 1. MultipartFile을 temp 파일로 저장
             File tempFile = File.createTempFile("voice", ".wav");
             voiceFile.transferTo(tempFile);

@@ -33,6 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/api/auth/login",         // 로그인
                         "/api/auth/logout",        // 로그아웃
+                        "/api/admin/auth/login",
+                        "/api/admin/auth/logout",
                         "/api/members",       // 회원가입
                         "/error",             // 에러 경로
                         "/css/**", "/js/**", "/images/**" // 정적 리소스

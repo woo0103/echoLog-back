@@ -1,19 +1,16 @@
 import json
-import random
+import whisper
 import sys
 
-responses = [
-    "정말 흥미로운 이야기네요!",
-    "그렇군요, 계속 들려주세요.",
-   "감정이 느껴지는 말이네요.",
-      "좋은 하루 되세요!",
-    "음... 생각해볼 만한 이야기예요."
-]
+# 1. Python 실행 시 전달된 인자 사용
+# ex) sys.argv[1] → Java에서 실행할 때 파일 경로 넘기기
+inputPath = sys.argv[1]
 
-# 랜덤 선택
+model = whisper.load_model("large-v3-turbo")  # 팀원이 만든 모델이면 따로 잘 들어있는지 확인
+data = model.transcribe(inputPath)
+
 result = {
-    "content": random.choice(responses)
+    "content": data["text"]
 }
 
-# JSON으로 출력
 print(json.dumps(result, ensure_ascii=False))

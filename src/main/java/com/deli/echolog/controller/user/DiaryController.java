@@ -8,6 +8,7 @@ import com.deli.echolog.dto.diary.DiaryResponseDto;
 import com.deli.echolog.dto.diary.DiaryUpdateRequestDto;
 import com.deli.echolog.service.DiaryService;
 import com.deli.echolog.service.MemberService;
+import com.deli.echolog.util.AuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -44,9 +45,9 @@ public class DiaryController {
 
     // 모든 일기 목록 조회
     @GetMapping
-    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(HttpServletRequest request,  @RequestParam(required = false) Integer year, @RequestParam(required = false) Integer month) {
+    public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer month) {
         // 세션에서 가져옴
-        Long memberId = getMemberIdFromSession(request);
+        Long memberId = AuthUtil.getLoginMemberId();
 
         // year 또는 month가 null이면 현재 날짜 기준으로 설정
         LocalDate now = LocalDate.now();
@@ -74,9 +75,9 @@ public class DiaryController {
 
     // 일기 저장
     @PostMapping
-    public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto, HttpServletRequest request) {
+    public ResponseEntity<DiaryResponseDto> createDiary(@RequestParam boolean temp, @RequestBody DiaryCreateRequestDto diaryCreateRequestDto) {
 
-        Long memberId = getMemberIdFromSession(request);
+        Long memberId = AuthUtil.getLoginMemberId();
         String content = diaryCreateRequestDto.getContent();
         LocalDate writtenDate = diaryCreateRequestDto.getWrittenDate();
 
@@ -104,10 +105,5 @@ public class DiaryController {
         diaryService.deleteDiary(diaryId);
     }
 
-    // 세션에서 memberId 가져오는 메서드임
-    private Long getMemberIdFromSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Long memberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
-        return memberId;
-    }
+
 }

@@ -2,6 +2,9 @@
 INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at)
 VALUES (1, '홍길동', 'hong@example.com', 'securePassword123', 'USER', '1995-06-15', '010-1234-5678', NOW(), NOW());
 
+INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at)
+VALUES (2, '관리자', 'admin@admin.com', 'admin', 'ADMIN', '1995-06-15', '010-1234-5678', NOW(), NOW());
+
 -- EMOTION 데이터 (30개)
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (1, 'ANGRY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (2, 'JOY', NOW(), NOW());

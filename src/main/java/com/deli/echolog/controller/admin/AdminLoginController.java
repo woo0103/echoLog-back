@@ -2,8 +2,8 @@ package com.deli.echolog.controller.admin;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.dto.login.LoginRequestDto;
+import com.deli.echolog.dto.login.LoginResponseDto;
 import com.deli.echolog.service.LoginService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,27 +23,9 @@ public class AdminLoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request) {
-        String email = loginRequestDto.getEmail();
-        String password = loginRequestDto.getPassword();
-        Member loginMember = loginService.login(email, password);
-
-        // 로그인 실패시 예외
-        if (loginMember == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("LOGIN_MEMBER_ID", loginMember.getId());
-        return ResponseEntity.ok("로그인 성공");
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
+        String token = loginService.login(loginRequestDto.getEmail(), loginRequestDto.getPassword());
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return ResponseEntity.ok("로그아웃 성공");
-    }
 }

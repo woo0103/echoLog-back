@@ -7,7 +7,7 @@ import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
 import com.deli.echolog.exception.AdminAccessDeniedException;
 import com.deli.echolog.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.deli.echolog.util.AuthUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +24,8 @@ public class AdminMemberController {
 
     // 회원 조회 (사용자)
     @GetMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId, HttpServletRequest request) {
-        validateAdminSession(request);
+    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId) {
+        validateAdminSession();
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
         // Dto로 변환 후 반환
@@ -33,9 +33,8 @@ public class AdminMemberController {
     }
 
     @PutMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, HttpServletRequest request, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
-
-        validateAdminSession(request);
+    public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+        validateAdminSession();
 
         // 정보 수정
         Member member = memberService.updapteMember(
@@ -45,9 +44,8 @@ public class AdminMemberController {
     }
 
     // 관리자가 요청한게 맞는지 확인하는 메서드임
-    private void validateAdminSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Long loginMemberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
+    private void validateAdminSession() {
+        Long loginMemberId = AuthUtil.getLoginMemberId();
         Member member = memberService.getMember(loginMemberId);
 
         if (member.getRole() != Role.ADMIN) {

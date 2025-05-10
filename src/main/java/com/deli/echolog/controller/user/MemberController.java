@@ -7,7 +7,7 @@ import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
 import com.deli.echolog.service.LoginService;
 import com.deli.echolog.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.deli.echolog.util.AuthUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +31,8 @@ public class MemberController {
 
     // 회원 조회 (사용자)
     @GetMapping("/me")
-    public ResponseEntity<MemberResponseDto> getMember(HttpServletRequest request) {
-        Long memberId = getMemberIdFromSession(request);
+    public ResponseEntity<MemberResponseDto> getMember() {
+        Long memberId = AuthUtil.getLoginMemberId();
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
         // Dto로 변환 후 반환
@@ -65,9 +65,9 @@ public class MemberController {
 
     // 회원 정보 수정
     @PutMapping()
-    public ResponseEntity<MemberResponseDto> updateMember(HttpServletRequest request, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+    public ResponseEntity<MemberResponseDto> updateMember(@RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
         // 세션에서 찾아옴
-        Long memberId = getMemberIdFromSession(request);
+        Long memberId = AuthUtil.getLoginMemberId();
 
         // 정보 수정
         Member member = memberService.updapteMember(
@@ -79,19 +79,11 @@ public class MemberController {
 
     // 회원 삭제
     @DeleteMapping()
-    public void deleteMember(HttpServletRequest request) {
-        Long memberId = getMemberIdFromSession(request);
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+    public void deleteMember() {
+        Long memberId = AuthUtil.getLoginMemberId();
         memberService.deleteMember(memberId);
     }
 
-    // 세션에서 memberId 찾아오는 메서드임
-    private Long getMemberIdFromSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        return (Long) session.getAttribute("LOGIN_MEMBER_ID");
-    }
+
 
 }

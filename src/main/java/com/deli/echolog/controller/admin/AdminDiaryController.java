@@ -4,7 +4,6 @@ package com.deli.echolog.controller.admin;
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.dto.diary.DiaryListResponseDto;
 import com.deli.echolog.service.DiaryService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

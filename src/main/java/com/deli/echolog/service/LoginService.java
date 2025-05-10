@@ -2,6 +2,8 @@ package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.domain.Role;
+import com.deli.echolog.jwt.JwtTokenProvider;
+import com.deli.echolog.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,37 +14,18 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Transactional(readOnly = true)
 public class LoginService {
 
-    private final MemberService memberService;
+    private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public Member login(String email, String password) {
-        Member member = memberService.findByEmail(email);
-        if (member == null) {
-            throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
-        }
-
-        if (!member.getPassword().equals(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-
-
-        return member;
-    }
-
-    public Member adminLogin(String email, String password) {
-        Member member = memberService.findByEmail(email);
-        if (member == null) {
-            throw new IllegalArgumentException("존재하지 않는 이메일입니다.");
-        }
+    public String login(String email, String password) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 이메일입니다."));
 
         if (!member.getPassword().equals(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
-        if (member.getRole() != Role.ADMIN) {
-            throw new IllegalArgumentException("관리자 권환이 없습니다.");
-        }
-        return member;
+        // ✅ 로그인 성공 시 JWT 발급
+        return jwtTokenProvider.createToken(member.getId(), member.getRole().name());
     }
-
-
 }

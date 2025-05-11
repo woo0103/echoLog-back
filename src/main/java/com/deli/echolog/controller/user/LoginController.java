@@ -22,10 +22,13 @@ import java.util.Map;
 public class LoginController {
 
     private final LoginService loginService;
+    private final MemberService memberService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
         String token = loginService.login(requestDto.getEmail(), requestDto.getPassword());
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Member;
+import com.deli.echolog.dto.login.EmailExistResponseDto;
 import com.deli.echolog.dto.login.LoginRequestDto;
 import com.deli.echolog.dto.login.LoginResponseDto;
 import com.deli.echolog.service.LoginService;
@@ -30,5 +31,15 @@ public class LoginController {
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
+    @GetMapping("/exist/{email}")
+    public ResponseEntity<EmailExistResponseDto> emailExistValidate(@PathVariable String email) {
+        Member member = memberService.findByEmail(email);
+
+        if (member == null) {
+            return ResponseEntity.ok(new EmailExistResponseDto(false));
+        }
+
+        return ResponseEntity.ok(new EmailExistResponseDto(true));
+    }
 
 }

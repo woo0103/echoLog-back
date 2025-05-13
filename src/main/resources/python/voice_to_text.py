@@ -1,6 +1,9 @@
 import json
 import whisper
 import sys
+import os
+
+os.environ["PATH"] += os.pathsep + "C:\\Users\\playj\\Downloads\\ffmpeg-7.1.1-essentials_build\\ffmpeg-7.1.1-essentials_build\\bin"
 
 # 1. Python 실행 시 전달된 인자 사용
 # ex) sys.argv[1] → Java에서 실행할 때 파일 경로 넘기기

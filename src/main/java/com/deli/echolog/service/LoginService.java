@@ -25,7 +25,7 @@ public class LoginService {
             throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
-        // ✅ 로그인 성공 시 JWT 발급
+        // 로그인 성공 시 JWT 발급
         return jwtTokenProvider.createToken(member.getId(), member.getRole().name());
     }
 }

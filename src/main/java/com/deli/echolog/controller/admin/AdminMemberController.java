@@ -14,6 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -22,7 +27,7 @@ public class AdminMemberController {
 
     private final MemberService memberService;
 
-    // 회원 조회 (사용자)
+    // 회원 조회
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId) {
         validateAdminSession();
@@ -30,6 +35,23 @@ public class AdminMemberController {
         Member member = memberService.getMember(memberId);
         // Dto로 변환 후 반환
         return ResponseEntity.ok(MemberResponseDto.from(member));
+    }
+
+    // 회원 목록 조회
+    @GetMapping
+    public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
+        validateAdminSession();
+        List<Member> members = memberService.getAllMembers();
+        List<MemberResponseDto> responseMembers = new ArrayList<>();
+
+        for (Member member : members) {
+            responseMembers.add(MemberResponseDto.from(member));
+        }
+
+        Map<String, List<MemberResponseDto>> response = new HashMap<>();
+        response.put("members", responseMembers);
+        return ResponseEntity.ok(response);
+
     }
 
     @PutMapping("/{memberId}")

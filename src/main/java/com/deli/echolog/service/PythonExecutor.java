@@ -17,7 +17,7 @@ public class PythonExecutor {
     public static String execute(String scriptName, String input) throws IOException, InterruptedException {
         File scriptFile = extractPythonScript(scriptName);
 
-        ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath());
+        ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath(), input);
         builder.environment().put("PYTHONIOENCODING", "utf-8");
 
         Process process = builder.start();

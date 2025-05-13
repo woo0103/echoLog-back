@@ -39,22 +39,6 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 회원 목록 조회
-    @GetMapping
-    public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
-        List<Member> members = memberService.getAllMembers();
-        List<MemberResponseDto> responseMembers = new ArrayList<>();
-
-        for (Member member : members) {
-            responseMembers.add(MemberResponseDto.from(member));
-        }
-
-        Map<String, List<MemberResponseDto>> response = new HashMap<>();
-        response.put("members", responseMembers);
-        return ResponseEntity.ok(response);
-
-    }
-
     // 회원 가입
     @PostMapping
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberCreateRequestDto memberCreateRequestDto) {

@@ -1,5 +1,6 @@
 package com.deli.echolog.service;
 
+import com.deli.echolog.python.WhisperSession;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,22 +20,21 @@ public class VoiceToTextService {
 
     public String convert(MultipartFile voiceFile) {
         try {
-
-            // 1. MultipartFile을 temp 파일로 저장
+            // 1. MultipartFile을 임시 파일로 저장
             File tempFile = File.createTempFile("voice", ".wav");
             voiceFile.transferTo(tempFile);
 
-            // 2. 파이썬 실행
-            String inputPath = tempFile.getAbsolutePath();
-            String resultJson = PythonExecutor.execute("voice_to_text.py", inputPath);
-            log.info("파이썬으로부터 받은 결과: {}", resultJson);
+            // 2. WhisperSession을 통해 텍스트 추출 (whisper 서버는 모델 재사용 중!)
+            String resultJson = WhisperSession.transcribe(tempFile.getAbsolutePath());
+            log.info("Whisper 결과 수신: {}", resultJson);
 
-            // 3. 파싱 (결과: {"content": "텍스트"})
+            // 3. 결과 파싱
             Map<String, Object> result = objectMapper.readValue(resultJson, new TypeReference<>() {});
             Object content = result.get("content");
             if (content == null) {
                 throw new RuntimeException("결과 JSON에 'content' 키가 없음");
             }
+
             return content.toString();
 
         } catch (Exception e) {
@@ -42,5 +42,4 @@ public class VoiceToTextService {
             throw new RuntimeException("STT 변환 중 예외 발생", e);
         }
     }
-
 }

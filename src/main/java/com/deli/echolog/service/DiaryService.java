@@ -36,6 +36,11 @@ public class DiaryService {
         return diaryRepository.findByWrittenDateAndMemberId(writtenDate, memberId);
     }
 
+    // transformDiaryId로 일기 조회
+    public Diary getDiaryByTransformDiaryId(Long transformDiaryId) {
+        return diaryRepository.findByTransformDiaryId(transformDiaryId);
+    }
+
     // 회원별 일기 목록 조회
     public List<Diary> getAllDiaries(Long memberId) {
         return diaryRepository.findByMemberId(memberId);

@@ -16,6 +16,9 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     // 일기 월별로 조회
     List<Diary> findByMemberIdAndWrittenDateBetween(Long memberId, LocalDate startDate, LocalDate endDate);
 
+    // transformDiaryId로 일기 조회
+    Diary findByTransformDiaryId(Long transformDiaryId);
+
     // 일기 날짜로 조회
     Diary findByWrittenDateAndMemberId(LocalDate written, Long memberId);
 

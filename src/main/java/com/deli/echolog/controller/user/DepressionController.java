@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Depression;
 import com.deli.echolog.domain.Diary;
@@ -47,7 +47,7 @@ public class DepressionController {
     public ResponseEntity<DepressionResponseDto> updateDepression(@PathVariable Long depressionId
             , @RequestBody DepressionUpdateRequestDto depressionUpdateRequestDto) {
         // 수정함
-        Depression depression = depressionService.updateDepression(depressionId, depressionUpdateRequestDto.getContent(), depressionUpdateRequestDto.getEmotionScore(),
+        Depression depression = depressionService.updateDepression(depressionId, depressionUpdateRequestDto.getResult(), depressionUpdateRequestDto.getEmotionScore(),
                 depressionUpdateRequestDto.getDepressionWordScore(), depressionUpdateRequestDto.getPhq9Score(), depressionUpdateRequestDto.getGad7Score());
 
         return ResponseEntity.ok(DepressionResponseDto.from(depression));

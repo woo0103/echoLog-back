@@ -1,12 +1,13 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.dto.diary.DiaryListResponseDto;
 import com.deli.echolog.dto.member.MemberCreateRequestDto;
 import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
+import com.deli.echolog.service.LoginService;
 import com.deli.echolog.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.deli.echolog.util.AuthUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,28 +28,15 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 회원 조회
-    @GetMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId) {
+
+    // 회원 조회 (사용자)
+    @GetMapping("/me")
+    public ResponseEntity<MemberResponseDto> getMember() {
+        Long memberId = AuthUtil.getLoginMemberId();
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
         // Dto로 변환 후 반환
         return ResponseEntity.ok(MemberResponseDto.from(member));
-    }
-
-    @GetMapping
-    public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
-        List<Member> members = memberService.getAllMembers();
-        List<MemberResponseDto> responseMembers = new ArrayList<>();
-
-        for (Member member : members) {
-            responseMembers.add(MemberResponseDto.from(member));
-        }
-
-        Map<String, List<MemberResponseDto>> response = new HashMap<>();
-        response.put("members", responseMembers);
-        return ResponseEntity.ok(response);
-
     }
 
     // 회원 가입
@@ -60,8 +48,11 @@ public class MemberController {
     }
 
     // 회원 정보 수정
-    @PutMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+    @PutMapping()
+    public ResponseEntity<MemberResponseDto> updateMember(@RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+        // 세션에서 찾아옴
+        Long memberId = AuthUtil.getLoginMemberId();
+
         // 정보 수정
         Member member = memberService.updapteMember(
                 memberId, memberUpdateRequestDto.getName(), memberUpdateRequestDto.getPassword(), memberUpdateRequestDto.getBirthDate(), memberUpdateRequestDto.getPhone()
@@ -69,17 +60,14 @@ public class MemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
-    // 삭제
-    /*@DeleteMapping("/{memberId}")
-    public void deleteMember(@PathVariable Long memberId) {
-        memberService.deleteMember(memberId);
-    }*/
 
+    // 회원 삭제
     @DeleteMapping()
-    public void deleteMember(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Long memberId = (Long) session.getAttribute("LOGIN_MEMBER_ID");
+    public void deleteMember() {
+        Long memberId = AuthUtil.getLoginMemberId();
         memberService.deleteMember(memberId);
     }
+
+
 
 }

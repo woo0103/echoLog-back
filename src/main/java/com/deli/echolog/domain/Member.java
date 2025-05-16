@@ -14,8 +14,7 @@ import java.util.List;
 // 회원 엔티티
 public class Member {
     @Id
-    @GeneratedValue
-    @Column(name = "member_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 이름(길이제한 50)

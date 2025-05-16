@@ -11,13 +11,13 @@ public class PythonExecutor {
      * 파이썬 스크립트를 실행하고 결과를 문자열로 반환
      *
      * @param scriptName 실행할 파이썬 파일 이름 (resources/python 디렉토리에 위치)
-     * @param inputJson  파이썬으로 전달할 JSON 문자열
+     * @param input  파이썬으로 전달할 JSON 문자열
      * @return 파이썬에서 반환한 stdout 문자열
      */
     public static String execute(String scriptName, String input) throws IOException, InterruptedException {
         File scriptFile = extractPythonScript(scriptName);
 
-        ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath());
+        ProcessBuilder builder = new ProcessBuilder("python", scriptFile.getAbsolutePath(), input);
         builder.environment().put("PYTHONIOENCODING", "utf-8");
 
         Process process = builder.start();

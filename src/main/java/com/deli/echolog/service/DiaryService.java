@@ -31,9 +31,33 @@ public class DiaryService {
                 .orElseThrow(() -> new DiaryNotFoundException("diary not found"));
     }
 
+    // 날짜로 일기 조회
+    public Diary getDiaryByWrittenDate(LocalDate writtenDate, Long memberId) {
+        return diaryRepository.findByWrittenDateAndMemberId(writtenDate, memberId);
+    }
+
+    // transformDiaryId로 일기 조회
+    public Diary getDiaryByTransformDiaryId(Long transformDiaryId) {
+        return diaryRepository.findByTransformDiaryId(transformDiaryId);
+    }
+
     // 회원별 일기 목록 조회
     public List<Diary> getAllDiaries(Long memberId) {
         return diaryRepository.findByMemberId(memberId);
+    }
+
+    // 회원별 일기 월별 조회
+    public List<Diary> getDiariesByMonth(Long memberId, int year, int month) {
+        LocalDate start = LocalDate.of(year, month, 1);
+        LocalDate end = start.plusMonths(1).minusDays(1);
+        return diaryRepository.findByMemberIdAndWrittenDateBetween(memberId, start, end);
+    }
+
+    // 회원별 일기 14일치 조회
+    public List<Diary> getDiariesBy2weeks(Long memberId, LocalDate writtenDate) {
+        LocalDate start = writtenDate.minusDays(13);
+        LocalDate end = writtenDate;
+        return diaryRepository.findByMemberIdAndWrittenDateBetween(memberId, start, end);
     }
 
     // 일기 저장
@@ -44,6 +68,9 @@ public class DiaryService {
         // 저장 먼저(영속성 컨텍스에 diary 넣어야 분석 가능)
         return diaryRepository.save(diary);
     }
+
+
+
 
     // 일기 생성
     /**
@@ -57,7 +84,15 @@ public class DiaryService {
     public Diary createDiary(boolean temp, Long memberId, String content, LocalDate writtenDate) {
         // 회원 찾아옴
         Member member = memberService.getMember(memberId);
-        // 일기 내요 저장
+        // 작성하는 날짜에 이미 일기가 있는지 확인함
+        Diary diaryByWrittenDate = getDiaryByWrittenDate(writtenDate, memberId);
+        // 있으면 삭제 후 생성
+        if (diaryByWrittenDate != null) {
+            deleteDiary(diaryByWrittenDate.getId());
+        }
+
+
+        // 일기 내용 저장
         Diary diary = new Diary(content,writtenDate);
         // 연관관계 설정하기 전에 일기 영속성 컨텍스트에 넣음
         saveDiary(diary);

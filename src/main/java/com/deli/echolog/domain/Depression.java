@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 // 우울증 분석 엔티티
 public class Depression {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "depression_id")
     private Long id;
 
@@ -20,8 +20,7 @@ public class Depression {
     private Diary diary;
 
     // 우울증 분석 내용
-    @Column(columnDefinition = "TEXT")
-    private String content;
+    private boolean result;
 
     // 감정 점수
     private double emotionScore;
@@ -43,8 +42,8 @@ public class Depression {
         this.diary = diary;
     }
 
-    public void update(String content, Double emotionScore, Double depressionWordScore, Double phq9Score, Double gad7Score) {
-        this.content = content;
+    public void update(boolean result, double emotionScore, double depressionWordScore, double phq9Score, double gad7Score) {
+        this.result = result;
         this.emotionScore = emotionScore;
         this.depressionWordScore = depressionWordScore;
         this.phq9Score = phq9Score;

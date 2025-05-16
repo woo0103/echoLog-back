@@ -1,9 +1,6 @@
 package com.deli.echolog.service;
 
-import com.deli.echolog.domain.Depression;
-import com.deli.echolog.domain.Diary;
-import com.deli.echolog.domain.Emotion;
-import com.deli.echolog.domain.EmotionType;
+import com.deli.echolog.domain.*;
 import com.deli.echolog.dto.emotion.EmotionJsonRequestDto;
 import com.deli.echolog.dto.emotion.EmotionJsonResponseDto;
 import com.deli.echolog.exception.DepressionNotFoundException;
@@ -90,4 +87,6 @@ public class EmotionService {
             throw new RuntimeException("감정 분석 중 예외 발생", e);
         }
     }
+
 }
+

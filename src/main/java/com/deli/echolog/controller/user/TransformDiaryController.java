@@ -1,4 +1,4 @@
-package com.deli.echolog.controller;
+package com.deli.echolog.controller.user;
 
 import com.deli.echolog.domain.Diary;
 import com.deli.echolog.domain.TransformDiary;
@@ -46,6 +46,10 @@ public class TransformDiaryController {
             , @RequestBody TransformDiaryUpdateRequestDto transformDiaryUpdateRequestDto) {
 
         TransformDiary transformDiary = transformDiaryService.updateTransformDiary(transformDiaryId, transformDiaryUpdateRequestDto.getContent());
+
+        // 일기 다시 분석
+        Diary diary = diaryService.getDiaryByTransformDiaryId(transformDiaryId);
+        diaryService.analyzeDiary(diary);
 
         return ResponseEntity.ok(TransformDiaryResponseDto.from(transformDiary));
     }

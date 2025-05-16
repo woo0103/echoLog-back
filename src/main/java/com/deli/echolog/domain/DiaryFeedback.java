@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class DiaryFeedback {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diary_feedback_id")
     private Long id;
 

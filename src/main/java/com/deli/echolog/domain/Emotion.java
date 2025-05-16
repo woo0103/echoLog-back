@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Emotion {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emotion_id")
     private Long id;
 

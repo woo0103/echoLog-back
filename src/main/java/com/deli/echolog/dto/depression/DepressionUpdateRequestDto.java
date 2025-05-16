@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class DepressionUpdateRequestDto {
 
-    private String content;
+    private Boolean result;
     private Double emotionScore;
     private Double depressionWordScore;
     private Double phq9Score;

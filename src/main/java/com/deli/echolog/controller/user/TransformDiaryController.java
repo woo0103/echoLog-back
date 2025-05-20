@@ -49,7 +49,7 @@ public class TransformDiaryController {
 
         // 일기 다시 분석
         Diary diary = diaryService.getDiaryByTransformDiaryId(transformDiaryId);
-        diaryService.analyzeDiary(diary);
+        diaryService.analyzeDiary(diary, transformDiary);
 
         return ResponseEntity.ok(TransformDiaryResponseDto.from(transformDiary));
     }

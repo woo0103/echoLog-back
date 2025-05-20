@@ -141,4 +141,14 @@ public class DiaryService {
         Depression depression = depressionService.analyzeDepression(diary);
     }
 
+    @Transactional
+    public void analyzeDiary(Diary diary, TransformDiary transformDiary) {
+        // 분석 후 연관관계까지 설정
+        Emotion emotion = emotionService.analyzeEmotion(diary);
+        DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
+        Depression depression = depressionService.analyzeDepression(diary);
+
+        diary.changeTransformDiary(transformDiary);
+    }
+
 }

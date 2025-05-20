@@ -8,5 +8,4 @@ import lombok.Setter;
 @Setter
 public class EmotionUpdateRequestDto {
     private EmotionType emotionType;
-    private Double intensity;
 }

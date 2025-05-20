@@ -45,7 +45,7 @@ public class EmotionController {
     @PutMapping("/{emotionId}")
     public ResponseEntity<EmotionResponseDto> updateEmotion(@PathVariable Long emotionId, @RequestBody EmotionUpdateRequestDto emotionUpdateRequestDto) {
 
-        Emotion emotion = emotionService.updateEmotion(emotionId, emotionUpdateRequestDto.getEmotionType(), emotionUpdateRequestDto.getIntensity());
+        Emotion emotion = emotionService.updateEmotion(emotionId, emotionUpdateRequestDto.getEmotionType());
         // 반환함
         return ResponseEntity.ok(EmotionResponseDto.from(emotion));
     }

@@ -41,7 +41,7 @@ public class EmotionService {
     }
 
     // 감정 수정
-    public Emotion updateEmotion(Long emotionId, EmotionType emotionType, Double intensity) {
+    public Emotion updateEmotion(Long emotionId, EmotionType emotionType) {
         Emotion emotion = getEmotion(emotionId);
         emotion.update(emotionType);
         return emotion;

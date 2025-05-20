@@ -140,7 +140,7 @@ public class DiaryService {
         DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
         Depression depression = depressionService.analyzeDepression(diary);
     }
-    
+
     @Transactional
     public void analyzeDiary(Diary diary, TransformDiary transformDiary) {
         // 분석 후 연관관계까지 설정

@@ -2,11 +2,14 @@ package com.deli.echolog.service;
 
 import com.deli.echolog.domain.Depression;
 import com.deli.echolog.domain.Diary;
+import com.deli.echolog.domain.Member;
 import com.deli.echolog.domain.Notice;
 import com.deli.echolog.exception.DepressionNotFoundException;
 import com.deli.echolog.repository.NoticeRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,12 +21,17 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
-    // 공지사항 조회
+    // 공지사항 단건 조회
     @Transactional(readOnly = true)
     public Notice getNotice(Long noticeId) {
         // id에 해당하는 일기가 없으면 예외 던짐
         return noticeRepository.findById(noticeId)
                 .orElseThrow(() -> new DepressionNotFoundException("notice not found"));
+    }
+
+    // 공지사항 목록 조회
+    public Page<Notice> getAllMembers(Pageable pageable) {
+        return noticeRepository.findAll(pageable);
     }
 
 

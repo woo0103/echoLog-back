@@ -14,7 +14,7 @@ public class TransformSession {
     static {
         try {
             String pythonPath = "python3";
-            String scriptPath = "/home/t25121/transfrom_content.py";
+            String scriptPath = "/home/t25121/transform_content.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");

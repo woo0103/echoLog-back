@@ -17,10 +17,10 @@ public class RecapService {
 
     private final RecapRepository recapRepository;
 
-    public Map<String, Long> getEmotionRecap() {
+    public Map<String, Long> getEmotionRecap(Long memberId) {
         LocalDate fromDate = LocalDate.now().minusDays(13); // 오늘 포함해서 14일치
 
-        List<Object[]> raw = recapRepository.countEmotionTypesBetween(fromDate, LocalDate.now());
+        List<Object[]> raw = recapRepository.countEmotionTypesBetween(fromDate, LocalDate.now(), memberId);
 
         // Object[] -> Map<String, Long> 변환 (정렬 포함)
         return raw.stream()

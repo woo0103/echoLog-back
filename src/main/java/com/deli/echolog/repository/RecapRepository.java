@@ -16,19 +16,23 @@ public class RecapRepository {
 
     private final EntityManager em;
 
-    public List<Object[]> countEmotionTypesBetween(LocalDate fromDate, LocalDate toDate) {
+    public List<Object[]> countEmotionTypesBetween(LocalDate fromDate, LocalDate toDate, Long memberId) {
         return em.createQuery("""
-            SELECT e.emotionType, COUNT(e)
-            FROM Emotion e
-            JOIN e.diary d
-            WHERE d.writtenDate >= :fromDate AND d.writtenDate <= :toDate
-            GROUP BY e.emotionType
-            ORDER BY e.emotionType
-        """, Object[].class)
+        SELECT e.emotionType, COUNT(e)
+        FROM Emotion e
+        JOIN e.diary d
+        WHERE d.writtenDate >= :fromDate 
+          AND d.writtenDate <= :toDate
+          AND d.member.id = :memberId
+        GROUP BY e.emotionType
+        ORDER BY e.emotionType
+    """, Object[].class)
                 .setParameter("fromDate", fromDate)
                 .setParameter("toDate", toDate)
+                .setParameter("memberId", memberId)
                 .getResultList();
     }
+
 
 
 

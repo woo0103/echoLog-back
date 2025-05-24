@@ -3,6 +3,7 @@ package com.deli.echolog.controller.admin;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.domain.Role;
+import com.deli.echolog.dto.member.MemberListResponseDto;
 import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
 import com.deli.echolog.exception.AdminAccessDeniedException;
@@ -48,8 +49,8 @@ public class AdminMemberController {
         validateAdminSession();
         Page<Member> memberPage = memberService.getAllMembers(PageRequest.of(page, size));
 
-        List<MemberResponseDto> responseMembers = memberPage.stream()
-                .map(MemberResponseDto::from)
+        List<MemberListResponseDto> responseMembers = memberPage.stream()
+                .map(MemberListResponseDto::from)
                 .toList();
 
         Map<String, Object> response = new HashMap<>();

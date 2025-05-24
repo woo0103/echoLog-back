@@ -5,6 +5,8 @@ import com.deli.echolog.exception.DiaryNotFoundException;
 import com.deli.echolog.exception.MemberNotFoundException;
 import com.deli.echolog.repository.MemberRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,10 +35,10 @@ public class MemberService {
     }
 
     // 전체 회원 조회
-    public List<Member> getAllMembers() {
-
-        return memberRepository.findAll();
+    public Page<Member> getAllMembers(Pageable pageable) {
+        return memberRepository.findAll(pageable);
     }
+
 
     // 회원 가입
     public Member createMember(Member member) {

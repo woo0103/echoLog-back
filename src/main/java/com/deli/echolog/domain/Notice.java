@@ -1,5 +1,6 @@
 package com.deli.echolog.domain;
 
+import com.deli.echolog.dto.notice.NoticeResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -27,6 +28,15 @@ public class Notice {
     private BaseTime baseTime = new BaseTime();
 
     public void update(String title, String content, String writer) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
+
+    public Notice() {
+
+    }
+    public Notice (String title, String content, String writer) {
         this.title = title;
         this.content = content;
         this.writer = writer;

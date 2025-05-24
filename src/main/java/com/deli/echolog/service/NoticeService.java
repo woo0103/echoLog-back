@@ -30,7 +30,7 @@ public class NoticeService {
     }
 
     // 공지사항 목록 조회
-    public Page<Notice> getAllMembers(Pageable pageable) {
+    public Page<Notice> getAllNotice(Pageable pageable) {
         return noticeRepository.findAll(pageable);
     }
 
@@ -39,6 +39,11 @@ public class NoticeService {
     // 공지사항 저장
     public Notice saveNotice(Notice notice) {
         return noticeRepository.save(notice);
+    }
+
+    // 공지사항 생성
+    public Notice createNotice(Notice notice) {
+        return saveNotice(notice);
     }
 
     // 공지사항 수정

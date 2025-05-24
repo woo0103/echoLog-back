@@ -1,5 +1,6 @@
 package com.deli.echolog.controller.recap;
 
+import com.deli.echolog.util.AuthUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,8 @@ public class RecapController {
 
     @GetMapping("/emotion")
     public ResponseEntity<Map<String, Long>> getEmotionRecap() {
-        Map<String, Long> emotionStats = recapService.getEmotionRecap();
+        Long loginMemberId = AuthUtil.getLoginMemberId();
+        Map<String, Long> emotionStats = recapService.getEmotionRecap(loginMemberId);
         return ResponseEntity.ok(emotionStats);
     }
 

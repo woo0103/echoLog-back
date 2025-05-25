@@ -38,5 +38,3 @@ while True:
             "error": str(e)
         }
         print(json.dumps(error_output, ensure_ascii=False), flush=True)
-
-

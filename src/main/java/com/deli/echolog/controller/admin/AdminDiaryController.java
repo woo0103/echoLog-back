@@ -2,8 +2,13 @@ package com.deli.echolog.controller.admin;
 
 
 import com.deli.echolog.domain.Diary;
+import com.deli.echolog.domain.Member;
+import com.deli.echolog.domain.Role;
 import com.deli.echolog.dto.diary.DiaryListResponseDto;
+import com.deli.echolog.exception.AdminAccessDeniedException;
 import com.deli.echolog.service.DiaryService;
+import com.deli.echolog.service.MemberService;
+import com.deli.echolog.util.AuthUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +30,11 @@ import java.util.Map;
 public class AdminDiaryController {
 
     private final DiaryService diaryService;
+    private final MemberService memberService;
 
     @GetMapping
     public ResponseEntity<Map<String, List<DiaryListResponseDto>>> getAllDiaries(@RequestParam Long memberId, @RequestParam(required = false) Integer year, @RequestParam(required = false) Integer month) {
+        validateAdminSession();
 
         // year 또는 month가 null이면 현재 날짜 기준으로 설정
         LocalDate now = LocalDate.now();
@@ -51,6 +58,16 @@ public class AdminDiaryController {
         Map<String, List<DiaryListResponseDto>> response = new HashMap<>();
         response.put("diaries", responseDiaries);
         return ResponseEntity.ok(response);
+    }
+
+    // 관리자가 요청한게 맞는지 확인하는 메서드임
+    private void validateAdminSession() {
+        Long loginMemberId = AuthUtil.getLoginMemberId();
+        Member member = memberService.getMember(loginMemberId);
+
+        if (member.getRole() != Role.ADMIN) {
+            throw new AdminAccessDeniedException("관리자 권환이 필요합니다.");
+        }
     }
 
 }

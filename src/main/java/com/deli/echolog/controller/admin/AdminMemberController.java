@@ -3,6 +3,7 @@ package com.deli.echolog.controller.admin;
 
 import com.deli.echolog.domain.Member;
 import com.deli.echolog.domain.Role;
+import com.deli.echolog.dto.member.MemberListResponseDto;
 import com.deli.echolog.dto.member.MemberResponseDto;
 import com.deli.echolog.dto.member.MemberUpdateRequestDto;
 import com.deli.echolog.exception.AdminAccessDeniedException;
@@ -11,6 +12,8 @@ import com.deli.echolog.util.AuthUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,20 +42,26 @@ public class AdminMemberController {
 
     // 회원 목록 조회
     @GetMapping
-    public ResponseEntity<Map<String, List<MemberResponseDto>>> getAllMembers() {
+    public ResponseEntity<Map<String, Object>> getAllMembers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         validateAdminSession();
-        List<Member> members = memberService.getAllMembers();
-        List<MemberResponseDto> responseMembers = new ArrayList<>();
+        Page<Member> memberPage = memberService.getAllMembers(PageRequest.of(page, size));
 
-        for (Member member : members) {
-            responseMembers.add(MemberResponseDto.from(member));
-        }
+        List<MemberListResponseDto> responseMembers = memberPage.stream()
+                .map(MemberListResponseDto::from)
+                .toList();
 
-        Map<String, List<MemberResponseDto>> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("members", responseMembers);
-        return ResponseEntity.ok(response);
+        response.put("currentPage", memberPage.getNumber());
+        response.put("totalPages", memberPage.getTotalPages());
+        response.put("totalElements", memberPage.getTotalElements());
 
+        return ResponseEntity.ok(response);
     }
+
 
     @PutMapping("/{memberId}")
     public ResponseEntity<MemberResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {

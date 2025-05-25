@@ -13,7 +13,7 @@ public class TransformSession {
 
     static {
         try {
-            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
+            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python39\\python.exe";
             String scriptPath = "\"C:\\Users\\playj\\Desktop\\transform_content.py\"";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);

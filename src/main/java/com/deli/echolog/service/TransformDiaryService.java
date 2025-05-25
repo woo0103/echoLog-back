@@ -68,9 +68,13 @@ public class TransformDiaryService {
     private String parseTransformedContent(String json) {
         try {
             JsonNode root = objectMapper.readTree(json);
+            if (root.has("error")) {
+                throw new IllegalArgumentException("변환 실패: " + root.get("error").asText());
+            }
             return root.get("transformed").asText();
         } catch (Exception e) {
             throw new IllegalArgumentException("JSON 파싱 실패: " + json, e);
         }
     }
+
 }

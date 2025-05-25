@@ -13,7 +13,7 @@ public class WhisperSession {
 
     static {
         try {
-            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
+            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python39\\python.exe";
             String scriptPath = "C:\\Users\\playj\\Desktop\\voice_to_text.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);

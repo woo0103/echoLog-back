@@ -13,12 +13,12 @@ public class EmotionSession {
 
     static {
         try {
-            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
-            String scriptPath = "C:\\Users\\playj\\Desktop\\emotion_analysis.py";
+            String pythonPath = "C:\\Users\\playj\\AppData\\Local\\Programs\\Python\\Python39\\python.exe";
+            String scriptPath = "C:\\Users\\playj\\Desktop\\analyze_emotion.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");
-            builder.redirectErrorStream(false); // 에러 스트림 별도 분리
+            builder.redirectErrorStream(true); // stderr 포함
 
             process = builder.start();
 
@@ -34,12 +34,22 @@ public class EmotionSession {
     }
 
     public static synchronized String analyze(String sentence) throws IOException {
-        writer.write(sentence);
+        // JSON 형식으로 감싸기
+        String jsonInput = String.format("{\"content\": \"%s\"}", escapeJson(sentence));
+
+        writer.write(jsonInput);
         writer.newLine();
         writer.flush();
 
         String json = reader.readLine();
         log.info("📤 Emotion 응답 수신: {}", json);
         return json;
+    }
+
+    private static String escapeJson(String text) {
+        return text.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r");
     }
 }

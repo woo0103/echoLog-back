@@ -3,7 +3,39 @@ INSERT INTO member (id, name, email, password, role, birth_date, phone, created_
 VALUES (1, '홍길동', 'hong@example.com', 'securePassword123', 'USER', '1995-06-15', '010-1234-5678', NOW(), NOW());
 
 INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at)
-VALUES (2, '관리자', 'admin@admin.com', 'admin', 'ADMIN', '1995-06-15', '010-1234-5678', NOW(), NOW());
+VALUES (2, '관리자', 'admin@admin.com', 'admin', 'ADMIN', '1995-06-15', '010-1234-5678', NOW(), NOW());-- 사용자 23명
+INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at) VALUES
+(3, '이수민', 'sumin.lee@example.com', 'pass1234', 'USER', '1994-01-01', '010-1000-0003', NOW(), NOW()),
+(4, '박지훈', 'jihun.park@example.com', 'pass1234', 'USER', '1993-02-02', '010-1000-0004', NOW(), NOW()),
+(5, '최예린', 'yerin.choi@example.com', 'pass1234', 'USER', '1992-03-03', '010-1000-0005', NOW(), NOW()),
+(6, '정우성', 'woosung.jung@example.com', 'pass1234', 'USER', '1991-04-04', '010-1000-0006', NOW(), NOW()),
+(7, '강서윤', 'seoyoon.kang@example.com', 'pass1234', 'USER', '1990-05-05', '010-1000-0007', NOW(), NOW()),
+(8, '윤지호', 'jiho.yoon@example.com', 'pass1234', 'USER', '1992-06-06', '010-1000-0008', NOW(), NOW()),
+(9, '한지민', 'jimin.han@example.com', 'pass1234', 'USER', '1993-07-07', '010-1000-0009', NOW(), NOW()),
+(10, '서도영', 'doyoung.seo@example.com', 'pass1234', 'USER', '1994-08-08', '010-1000-0010', NOW(), NOW()),
+(11, '조윤아', 'yoona.jo@example.com', 'pass1234', 'USER', '1990-09-09', '010-1000-0011', NOW(), NOW()),
+(12, '배진우', 'jinwoo.bae@example.com', 'pass1234', 'USER', '1991-10-10', '010-1000-0012', NOW(), NOW()),
+(13, '임나현', 'nahyun.lim@example.com', 'pass1234', 'USER', '1995-11-11', '010-1000-0013', NOW(), NOW()),
+(14, '문세현', 'sehyun.moon@example.com', 'pass1234', 'USER', '1992-12-12', '010-1000-0014', NOW(), NOW()),
+(15, '오하늘', 'haneul.oh@example.com', 'pass1234', 'USER', '1993-01-13', '010-1000-0015', NOW(), NOW()),
+(16, '신유진', 'yujin.shin@example.com', 'pass1234', 'USER', '1994-02-14', '010-1000-0016', NOW(), NOW()),
+(17, '김다온', 'daon.kim@example.com', 'pass1234', 'USER', '1991-03-15', '010-1000-0017', NOW(), NOW()),
+(18, '남지섭', 'jiseob.nam@example.com', 'pass1234', 'USER', '1990-04-16', '010-1000-0018', NOW(), NOW()),
+(19, '노유하', 'yuha.no@example.com', 'pass1234', 'USER', '1992-05-17', '010-1000-0019', NOW(), NOW()),
+(20, '장예진', 'yejin.jang@example.com', 'pass1234', 'USER', '1993-06-18', '010-1000-0020', NOW(), NOW()),
+(21, '백지웅', 'jiwoong.baek@example.com', 'pass1234', 'USER', '1994-07-19', '010-1000-0021', NOW(), NOW()),
+(22, '양수아', 'sua.yang@example.com', 'pass1234', 'USER', '1995-08-20', '010-1000-0022', NOW(), NOW()),
+(23, '하도현', 'dohyun.ha@example.com', 'pass1234', 'USER', '1990-09-21', '010-1000-0023', NOW(), NOW()),
+(24, '권태윤', 'taeyoon.kwon@example.com', 'pass1234', 'USER', '1991-10-22', '010-1000-0024', NOW(), NOW()),
+(25, '배나영', 'nayeong.bae@example.com', 'pass1234', 'USER', '1992-11-23', '010-1000-0025', NOW(), NOW());
+
+-- 관리자 5명
+INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at) VALUES
+(26, '박지우', 'junsang.yoo@example.com', 'pass1234', 'USER', '1993-12-24', '010-1000-0026', NOW(), NOW()),
+(27, '서민영', 'admin.haein@example.com', 'adminpw1', 'ADMIN', '1990-01-01', '010-2000-0027', NOW(), NOW()),
+(28, '김건우', 'admin.soyeon@example.com', 'adminpw2', 'ADMIN', '1990-02-02', '010-2000-0028', NOW(), NOW()),
+(29, '김승훈', 'admin.sihu@example.com', 'adminpw3', 'ADMIN', '1990-03-03', '010-2000-0029', NOW(), NOW()),
+(30, '안제현', 'admin.haneul@example.com', 'adminpw4', 'ADMIN', '1990-04-04', '010-2000-0030', NOW(), NOW());
 
 -- EMOTION 데이터 (30개)
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (1, 'ANGRY', NOW(), NOW());
@@ -169,8 +201,45 @@ INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, trans
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (29, 1, '또 새로운 요리 도전했는데 이번엔 성공! 기분 좋다.', '2025-05-29', 29, 29, 29, 29, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (30, 1, '4월의 마지막 날. 이번 달은 정말 많은 일이 있었네. 내일부터는 새로운 마음으로 시작해보자.', '2025-05-30', 30, 30, 30, 30, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (31, 1, '새로운 사람들과 대화하니 재밌네. 다양한 생각을 접할 수 있어 좋다.', '2025-05-31', 31, 31, 31, 31, NOW(), NOW());
+
+INSERT INTO notice (notice_id, title, content, writer, created_at, updated_at) VALUES
+(1, '서비스 점검 안내', '안정적인 서비스 제공을 위해 서버 점검이 진행됩니다.', '박지우', NOW(), NOW()),
+(2, '신규 기능 출시', '오늘부터 감정 통계 차트를 확인할 수 있는 기능이 추가되었습니다.', '서민영', NOW(), NOW()),
+(3, '앱 업데이트 공지', 'v1.2.0 버전으로 앱이 업데이트되었습니다. 최신 버전을 이용해주세요.', '김건우', NOW(), NOW()),
+(4, '사용자 피드백 반영', '여러분의 소중한 의견을 반영하여 UI를 개선하였습니다.', '안제현', NOW(), NOW()),
+(5, '데이터 복구 완료', '어제 발생한 서버 오류로 인한 데이터 복구가 완료되었습니다.', '김승훈', NOW(), NOW()),
+(6, '공지사항 테스트', '이 글은 시스템 테스트용 공지입니다.', '박지우', NOW(), NOW()),
+(7, '이벤트 당첨자 발표', '감사 이벤트 당첨자를 발표합니다. 자세한 내용은 링크를 참고해주세요.', '서민영', NOW(), NOW()),
+(8, '로그인 오류 해결 안내', '일부 사용자에게 발생한 로그인 오류가 해결되었습니다.', '김건우', NOW(), NOW()),
+(9, '개인정보 처리방침 변경', '개인정보 처리방침이 6월 1일부로 변경됩니다. 사전 확인 부탁드립니다.', '안제현', NOW(), NOW()),
+(10, '서버 장애 복구 완료', '5월 25일 발생한 일시적 장애가 복구되어 정상적으로 이용 가능합니다.', '김승훈', NOW(), NOW()),
+(11, '고객센터 운영시간 변경', '고객센터 운영시간이 오전 9시~오후 6시로 변경됩니다.', '김건우', NOW(), NOW()),
+(12, '새로운 테마 적용 안내', '앱의 테마가 여름 테마로 변경되었습니다.', '서민영', NOW(), NOW()),
+(13, '이용약관 개정 안내', '2025년 6월부터 적용될 새로운 이용약관을 안내드립니다.', '안제현', NOW(), NOW()),
+(14, '주간 이용 통계 리포트', '이번 주 사용자 감정 통계를 공개합니다.', '박지우', NOW(), NOW()),
+(15, '일기 작성 팁 공유', '더 효과적인 감정 분석을 위한 일기 작성 팁을 확인하세요.', '김건우', NOW(), NOW()),
+(16, '사용자 인터뷰 모집', '앱 개선을 위한 사용자 인터뷰에 참여하실 분을 모집합니다.', '서민영', NOW(), NOW()),
+(17, '버그 제보 감사 이벤트', '버그 제보해주신 분들께 감사의 선물을 드립니다.', '김승훈', NOW(), NOW()),
+(18, '다크모드 기능 출시', '많은 요청이 있었던 다크모드 기능이 드디어 출시되었습니다.', '안제현', NOW(), NOW()),
+(19, '서버 이전 작업 완료', '서버 이전 작업이 완료되어 서비스 안정성이 향상되었습니다.', '김건우', NOW(), NOW()),
+(20, '앱 사용 가이드 업데이트', '초보자를 위한 앱 사용 가이드를 업데이트했습니다.', '박지우', NOW(), NOW()),
+(21, '기능 요청 설문조사', '여러분이 원하는 기능을 설문을 통해 알려주세요.', '서민영', NOW(), NOW()),
+(22, '모바일 최적화 개선', '모바일 환경에서 속도와 반응성을 개선했습니다.', '김승훈', NOW(), NOW()),
+(23, '보안 업데이트 공지', '최근 보안 이슈에 대응한 패치를 적용했습니다.', '안제현', NOW(), NOW()),
+(24, '앱 종료 일정 안내', '구버전 앱은 7월 1일부터 지원이 종료됩니다.', '김건우', NOW(), NOW()),
+(25, '사용자 성장 통계 안내', '지난 한 달간의 사용자 성장 지표를 확인해보세요.', '박지우', NOW(), NOW()),
+(26, '새로운 감정 추가 예정', '다양한 감정 인식을 위한 새로운 라벨이 추가될 예정입니다.', '김승훈', NOW(), NOW()),
+(27, '웹버전 출시 예고', '곧 PC에서도 EchoLog를 사용할 수 있게 됩니다.', '서민영', NOW(), NOW()),
+(28, '문의사항 응대 지연 안내', '현재 문의량 증가로 인해 답변이 지연되고 있습니다.', '안제현', NOW(), NOW()),
+(29, '정기 점검 사전 안내', '6월 3일(월) 새벽 1시부터 3시까지 점검이 진행됩니다.', '김건우', NOW(), NOW()),
+(30, '감정 데이터 시각화 기능', '감정 데이터를 그래프로 볼 수 있는 기능이 추가되었습니다.', '박지우', NOW(), NOW());
+
+
+ALTER TABLE member AUTO_INCREMENT = 31;
 ALTER TABLE diary AUTO_INCREMENT = 32;
 ALTER TABLE emotion AUTO_INCREMENT = 32;
 ALTER TABLE depression AUTO_INCREMENT = 32;
 ALTER TABLE transform_diary AUTO_INCREMENT = 32;
 ALTER TABLE diary_feedback AUTO_INCREMENT = 32;
+ALTER TABLE notice AUTO_INCREMENT = 31;
+

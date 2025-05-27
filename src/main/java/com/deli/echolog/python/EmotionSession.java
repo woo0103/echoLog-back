@@ -15,7 +15,7 @@ public class EmotionSession {
         try {
             // 서버 환경에 맞춘 경로
             String pythonPath = "python3";
-            String scriptPath = "/home/t25121/emotion_analysis.py";
+            String scriptPath = "/home/t25121/analyze_emotion.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");

@@ -74,6 +74,13 @@ public class AdminMemberController {
         return ResponseEntity.ok(MemberResponseDto.from(member));
     }
 
+    // 회원 삭제
+    @DeleteMapping("/{memberId}")
+    public void deleteMember(@PathVariable Long memberId) {
+        validateAdminSession();
+        memberService.deleteMember(memberId);
+    }
+
     // 관리자가 요청한게 맞는지 확인하는 메서드임
     private void validateAdminSession() {
         Long loginMemberId = AuthUtil.getLoginMemberId();

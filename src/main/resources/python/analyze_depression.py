@@ -17,10 +17,10 @@ def analyze(input_json):
 
     # 수치 4개 랜덤 생성
     result = {
-        "emotionScore": round(random.uniform(0, 10), 2),
-        "depressionWordScore": round(random.uniform(0, 10), 2),
-        "phq9Score": round(random.uniform(15, 27), 2),
-        "gad7Score": round(random.uniform(15, 21), 2),
+        "emotionScore": random.randint(0, 10),
+        "depressionWordScore": random.randint(0, 10),
+        "phq9Score": random.randint(15, 27),
+        "gad7Score": random.randint(15, 21),
         "feedback": random.choice(feedback_list)
     }
 

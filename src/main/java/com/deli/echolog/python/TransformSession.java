@@ -26,10 +26,10 @@ public class TransformSession {
             writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            log.info("✅ Transform 파이썬 서버 프로세스 시작 완료");
+            log.info("Transform 파이썬 서버 프로세스 시작 완료");
 
         } catch (IOException e) {
-            log.error("❌ Transform 세션 초기화 실패", e);
+            log.error("Transform 세션 초기화 실패", e);
             throw new RuntimeException("Transform 파이썬 서버 실행 실패", e);
         }
     }
@@ -43,7 +43,7 @@ public class TransformSession {
         writer.flush();
 
         String json = reader.readLine();
-        log.info("📤 Transform 응답 수신: {}", json);
+        log.info("Transform 응답 수신: {}", json);
         return json;
     }
 

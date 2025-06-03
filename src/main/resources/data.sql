@@ -38,8 +38,8 @@ INSERT INTO member (id, name, email, password, role, birth_date, phone, created_
 (30, '안제현', 'admin.haneul@example.com', 'adminpw4', 'ADMIN', '1990-04-04', '010-2000-0030', NOW(), NOW());
 
 -- EMOTION 데이터 (30개)
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (1, 'ANGRY', NOW(), NOW());
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (2, 'JOY', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (1, 'JOY', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (2, 'ANGRY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (3, 'SAD', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (4, 'ANXIETY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at)VALUES (5, 'HURT', NOW(), NOW());
@@ -65,16 +65,16 @@ INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (2
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (25, 'ANGRY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (26, 'JOY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (27, 'SAD', NOW(), NOW());
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (28, 'ANXIETY', NOW(), NOW());
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (29, 'HURT', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (28, 'SAD', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (29, 'SAD', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (30, 'EMBARRASSED', NOW(), NOW());
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (31, 'EMBARRASSED', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (31, 'SAD', NOW(), NOW());
 
 -- TRANSFORM_DIARY 데이터 (30개)
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (1, '오늘은 연속된 수업과 과제로 인해 몸과 마음이 모두 지친 하루였습니다. 아침부터 저녁까지 쉼 없이 이어지는 일정 속에서 적절한 휴식과 영양 섭취를 놓친 것 같아 아쉽습니다. 과도한 카페인 섭취로 인해 오히려 피로가 가중되었음을 느꼈습니다. 내일을 위해 오늘은 충분한 휴식을 취하고, 조금이라도 체력을 회복해야겠습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (2, '따뜻한 봄날씨 덕분에 산책을 하며 마음의 여유를 찾을 수 있었습니다. 공원에 핀 벚꽃과 상쾌한 바람이 지친 마음을 위로해 주었고, 강아지가 뛰노는 모습을 보며 순간적인 행복을 느꼈습니다. 최근의 무거웠던 감정들이 조금은 가벼워진 것 같아 기쁩니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (3, '오랜만에 친구를 만나 오랜 시간 이야기를 나누며 마음이 따뜻해졌습니다. 평소에 혼자서만 끙끙 앓던 고민들을 털어놓으니 속이 후련했고, 친구의 위로가 큰 힘이 되었습니다. 앞으로도 자주 만나며 서로의 일상을 공유해야겠다는 다짐을 했습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (4, '오늘은 아무런 이유 없이 무기력함이 느껴지는 하루였습니다. 하고 싶은 일도, 먹고 싶은 것도 없이 그저 시간이 흘러가기만 기다렸습니다. 이런 날도 삶의 일부라는 것을 받아들이려 노력했지만, 여전히 마음 한구석이 허전함으로 가득 찼습니다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (1, '오늘은 작고 소소한 일이 하루를 환하게 만들었다. 우연히 마주한 작은 기쁨이 마음을 간지럽혔고, 혼자 웃음이 새어 나왔다. 특별한 이유 없이 기분이 좋은 날이 있다는 건, 삶이 아직 따뜻하다는 증거 같았다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (2, '오늘은 억울한 감정이 하루 종일 나를 따라다녔다. 잘못한 사람은 따로 있는데, 내가 조용히 참아야 했고 결국 사과까지 하게 됐다. 겉으로는 아무렇지 않은 척했지만, 마음속 분노는 쉽게 가라앉지 않았다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (3, '오늘은 별일 없이 지나갔지만, 마음은 유독 무거웠다. 밝은 표정 뒤로 감춘 감정들이 하루 종일 나를 짓눌렀고, 사람들과의 대화조차 힘겹게 느껴졌다. 고요한 슬픔이 마음 안에 머물렀고, 나조차 내 마음을 이해하기 어려운 날이었다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (4, '발표를 앞둔 오늘 하루는 온몸이 긴장으로 굳어 있었다. 준비한 내용을 떠올리며 되뇌었지만, 막상 사람들 앞에 서자 모든 게 흐려졌다. 끝나고 나니 안도의 숨이 나왔고, 부족했더라도 그 자리에 선 나 자신이 자랑스러웠다.', NOW(), NOW());
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (5, '새로 구입한 책을 읽으며 오랜만에 집중하는 시간을 가졌습니다. 책 속의 문장들이 마음을 울렸고, 작은 위안을 얻을 수 있었습니다. 독서의 즐거움을 다시 한번 깨닫게 된 하루였습니다.', NOW(), NOW());
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (6, '갑작스러운 비로 인해 예정되었던 약속이 취소되어 실망스러운 하루를 보냈습니다. 창밖을 내다보며 허탈함을 느꼈지만, 이런 날도 필요한 휴식의 시간이라고 스스로를 위로하려 노력했습니다.', NOW(), NOW());
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (7, '오랜만에 가족들과 통화를 하며 따뜻한 대화를 나누었습니다. 평소에는 바쁘다는 이유로 소홀했던 관계가 생각나 마음이 무거웠지만, 앞으로는 자주 연락을 드려야겠다고 다짐했습니다.', NOW(), NOW());
@@ -98,16 +98,16 @@ INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (25, '오랜만에 영화를 보며 감동적인 시간을 보냈습니다. 영화 속 메시지가 마음에 깊이 와닿았습니다.', NOW(), NOW());
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (26, '오늘은 갑작스러운 계획 변경으로 인해 당황스러운 하루를 보냈습니다. 하지만 유연하게 대처하며 새로운 기회를 발견했습니다.', NOW(), NOW());
 INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (27, '오랜만에 일기를 쓰며 하루를 돌아보는 시간을 가졌습니다. 마음을 정리하니 내일을 위한 에너지가 생겼습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (28, '오늘은 평소보다 조용히 혼자만의 시간을 보냈습니다. 조용한 시간 속에서도 마음의 평화를 찾을 수 있었습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (29, '오랜만에 새로운 레시피에 도전하여 요리를 해보았습니다. 결과는 생각보다 만족스러웠습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (30, '오늘은 하루 종일 비가 내려 우울한 기분이 들었습니다. 하지만 따뜻한 차 한 잔과 좋아하는 음악을 들으며 마음을 다스렸습니다.', NOW(), NOW());
-INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (31, '오늘은 하루 종일 비가 내려 우울한 기분이 들었습니다. 하지만 따뜻한 차 한 잔과 좋아하는 음악을 들으며 마음을 다스렸습니다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (28, '오늘 퇴근길, 버스 창밖을 바라보다 문득 울컥해졌다. 주변은 분주했지만 나만 정지된 듯한 느낌이 들었고, 마음속 공허함이 깊어졌다. 말 한마디 건넬 기운조차 없어, 그저 고요 속에 나를 숨기고 싶었다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (29, '하루 종일 휴대폰은 조용했고, 나는 그 침묵 속에서 점점 작아졌다. 누군가의 연락이 간절했던 건 아니지만, 그 어떤 관심도 닿지 않는 느낌이 서글펐다. 가만히 앉아 있는 것만으로도 눈물이 고였고, 괜찮지 않다는 걸 스스로 인정하고 싶지 않았다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (30, '회의 중 예상치 못한 질문을 받았고, 순간 머릿속이 새하얘졌다. 모두의 시선이 느껴졌고, 침착하려 했지만 말이 꼬였다. 말은 했지만 스스로도 낯설게 느껴졌고, 자리를 떠나고 싶을 만큼 당황스러운 순간이었다. 평정심을 되찾기까지 시간이 오래 걸렸다.', NOW(), NOW());
+INSERT INTO transform_diary (transform_diary_id, content, created_at, updated_at) VALUES (31, '오늘은 이유 없이 마음이 내려앉는 하루였다. 특별한 사건이 있었던 것도 아니건만, 눈앞에 스치는 것들이 괜히 가슴을 먹먹하게 만들었다. 조용히 있으면 눈물이 나올 것 같았고, 아무 말도 하지 못한 채 하루를 보냈다. 나 자신에게조차 솔직해지기 어려운 날이었다.', NOW(), NOW());
 
 -- DIARY_FEEDBACK 데이터 (30개)
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (1, '피로가 누적되지 않도록 휴식을 취하는 것이 중요합니다. 내일은 좀 더 여유로운 일정을 계획해보세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (2, '산책은 마음을 치유하는 좋은 방법입니다. 자주 자연과 교감하세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (3, '친구와의 대화는 큰 힘이 됩니다. 소중한 관계를 유지하세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (4, '무기력함은 누구나 느끼는 감정입니다. 오늘은 쉬어가는 날이라고 생각하세요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (1, '작은 기쁨을 알아차릴 수 있다는 건 마음이 열려 있다는 뜻이에요. 그런 순간을 느낀 당신은 오늘을 충분히 잘 살아낸 거예요. 그 기분, 오래 간직하길 바라요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (2, '화가 나는 건 당연해요. 감정을 억누르는 것보다, 이렇게 표현해주는 게 훨씬 건강한 방법이에요. 오늘 당신은 참아낸 게 아니라, 감정을 이해하려 애쓴 거예요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (3, '이유 없이 슬픈 날도 있어요. 그런 감정을 받아들이는 것만으로도 충분히 잘하고 있는 거예요. 오늘도 잘 버텨준 당신, 정말 고마워요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (4, '긴장했다는 건 그만큼 당신이 진심이었다는 뜻이에요. 떨리는 순간에도 끝까지 해낸 당신은 충분히 대단해요. 완벽보다 중요한 건 용기예요.', 'LIKE', NOW(), NOW());
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (5, '독서는 마음의 양식입니다. 좋은 책과 함께하는 시간을 자주 가져보세요.', 'LIKE', NOW(), NOW());
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (6, '비오는 날은 우울할 수 있지만, 그 속에서도 작은 즐거움을 찾아보세요.', 'LIKE', NOW(), NOW());
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (7, '가족과의 대화는 소중합니다. 자주 연락드리세요.', 'LIKE', NOW(), NOW());
@@ -131,16 +131,16 @@ INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_a
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (25, '영화는 삶의 교훈을 줍니다. 좋은 작품을 자주 감상하세요.', 'LIKE', NOW(), NOW());
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (26, '계획 변경은 새로운 기회입니다. 유연하게 대처하세요.', 'LIKE', NOW(), NOW());
 INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (27, '일기는 마음의 거울입니다. 꾸준히 작성해보세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (28, '혼자만의 시간도 소중합니다. 즐겁게 보내세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (29, '요리는 창의적인 활동입니다. 즐기면서 도전하세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (30, '비오는 날은 마음이 우울할 수 있습니다. 따뜻한 차 한 잔으로 위로하세요.', 'LIKE', NOW(), NOW());
-INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (31, '비오는 날은 마음이 우울할 수 있습니다. 따뜻한 차 한 잔으로 위로하세요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (28, '조용히 멈추고 싶은 날도 있어요. 그런 감정을 느낄 줄 아는 당신은 충분히 섬세하고 따뜻한 사람이에요. 감정을 억누르지 말고, 스스로에게도 조금 더 부드럽게 대해주세요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (29, '슬픔은 이유를 따지기보단 그냥 느껴지는 감정이에요. 오늘 같은 날은 눈물을 참지 않아도 괜찮아요. 당신의 조용한 마음에도 누군가는 닿기를 바라고 있을 거예요.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (30, '회의 중 예상치 못한 질문을 받았고, 순간 머릿속이 새하얘졌다. 모두의 시선이 느껴졌고, 침착하려 했지만 말이 꼬였다. 말은 했지만 스스로도 낯설게 느껴졌고, 자리를 떠나고 싶을 만큼 당황스러운 순간이었다. 평정심을 되찾기까지 시간이 오래 걸렸다.', 'LIKE', NOW(), NOW());
+INSERT INTO diary_feedback (diary_feedback_id, content, user_reaction, created_at, updated_at) VALUES (31, '당신은 지금 스스로를 바라보고, 조용히 들여다보고 있어요. 그건 이미 잘 버티고 있다는 증거예요. 그냥 떠나고 싶다는 말은 도망이 아니라, 잠시 쉬고 싶다는 마음일지도 몰라요.', 'LIKE', NOW(), NOW());
 
 -- DEPRESSION 데이터 (30개)
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (1, TRUE, 0.8, 0.7, 15, 12, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (2, FALSE, 0.2, 0.1, 5, 4, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (3, FALSE, 0.3, 0.2, 6, 5, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (4, TRUE, 0.7, 0.6, 14, 11, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (1, FALSE, 1, 1, 7, 16, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (2, FALSE, 8, 6, 15, 17, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (3, FALSE, 7, 6, 16, 18, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (4, TRUE, 5, 5, 17, 20, NOW(), NOW());
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (5, FALSE, 0.4, 0.3, 7, 6, NOW(), NOW());
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (6, TRUE, 0.6, 0.5, 13, 10, NOW(), NOW());
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (7, FALSE, 0.5, 0.4, 8, 7, NOW(), NOW());
@@ -163,17 +163,17 @@ INSERT INTO depression (depression_id, result, emotion_score, depression_word_sc
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (24, FALSE, 0.5, 0.4, 8, 7, NOW(), NOW());
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (25, TRUE, 0.6, 0.5, 13, 10, NOW(), NOW());
 INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (26, FALSE, 0.1, 0.0, 4, 3, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (27, TRUE, 0.9, 0.8, 16, 13, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (28, FALSE, 0.2, 0.1, 5, 4, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (29, TRUE, 0.7, 0.6, 14, 11, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (30, FALSE, 0.3, 0.2, 6, 5, NOW(), NOW());
-INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (31, FALSE, 0.3, 0.2, 6, 5, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (27, TRUE, 10, 8, 16, 19, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (28, TRUE, 10, 5, 20, 26, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (29, TRUE, 10, 7, 21, 18, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (30, TRUE, 7, 7, 13, 17, NOW(), NOW());
+INSERT INTO depression (depression_id, result, emotion_score, depression_word_score, phq9score, gad7score, created_at, updated_at) VALUES (31, TRUE, 10, 6, 19, 20, NOW(), NOW());
 
 -- DIARY 데이터 (30개)
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (1, 1, '오늘 진짜 개피곤하다. 아침부터 수업 3개 연속으로 들었는데, 교수님들이 다 각자 과제를 내주시네. 점심도 건너뛰고 도서관에서 과제 하다가 머리 터질 뻔… 커피만 3잔 마신 것 같아. 집에 와서는 너무 힘들어서 그냥 눌렀음. 내일도 똑같이 반복될 생각하니… 막막하다 진짜.', '2025-05-01', 1, 1, 1, 1, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (2, 1, '날씨 겁나 좋아서 산책 나갔는데 기분이 좀 나아졌다. 공원에 벚꽃도 피고 바람도 시원해서 좋았음. 혼자 걷는데 옆에서 강아지 놀고 있는 거 보고 잠시 웃었네. 그래도 요즘 우울한 기분이 조금은 해소된 듯.', '2025-05-02', 2, 2, 2, 2, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (3, 1, '친구 만나서 카페 갔는데 웃긴 이야기하다가 기분 전환됐다. 나 요즘 우울해서 말도 별로 안 했는데, 오늘은 오랜만에 속이 후련해짐. 다음에 또 만나기로 했는데 기대됨.', '2025-05-03', 3, 3, 3, 3, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (4, 1, '오늘은 왜 이렇게 뭐 하나 하기 싫은지… 알람 끄고 계속 누워있었음. 밥도 먹기 귀찮고, 그냥 하루 종일 폰만 뒤적거렸네. 나 왜 이럴까?', '2025-05-04', 4, 4, 4, 4, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (1, 1, '오늘 진짜 별거 아닌 일인데 괜히 기분 좋았음. 편의점에서 마지막 하나 남은 내 최애 간식을 딱 집었을 때, 세상이 날 위해 준비한 선물 같았음. 누가 알아주지 않아도 혼자서 신났고, 괜히 하루가 반짝거렸음. 이런 작은 행복이 오래 갔으면 좋겠다.', '2025-06-01', 1, 1, 1, 1, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (2, 1, '오늘 진짜 열받았음. 분명 내 잘못 아닌데 이상하게 내가 사과하게 됐고, 말도 안 되는 상황인데 그냥 참고 넘겨야 했음. 웃으면서 넘기려고 했지만 속은 부글부글 끓었음. 괜히 혼자만 손해 본 기분, 하루 종일 머릿속에서 안 떠남.', '2025-06-02', 2, 2, 2, 2, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (3, 1, '오늘 발표하는 날이라 아침부터 심장이 계속 두근거렸음. 아무리 준비해도 무대 앞에 서니까 손이 떨리고 목이 마르더라. 머릿속이 하얘지는 느낌도 들었고, 다 끝나고 나서야 숨 좀 쉴 수 있었음. 잘했는진 모르겠지만, 어쨌든 해낸 것 같아 다행이었다.', '2025-06-03', 3, 3, 3, 3, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (4, 1, '오늘은 왜 이렇게 뭐 하나 하기 싫은지… 알람 끄고 계속 누워있었음. 밥도 먹기 귀찮고, 그냥 하루 종일 폰만 뒤적거렸네. 나 왜 이럴까?', '2025-06-04', 4, 4, 4, 4, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (5, 1, '새로 산 책 읽었는데 진짜 좋다. 작가가 쓴 문장 하나하나가 마음에 와닿아서 계속 생각나네. 오랜만에 머리도 식히고 기분도 전환된 기분.', '2025-05-05', 5, 5, 5, 5, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (6, 1, '오늘 약속 있었는데 비 와서 취소됐음. 계획한 거 다 틀어져서 기분 더러웠다. 창문 열고 비 내리는 거 보다가 그냥 잠들었네.', '2025-05-06', 6, 6, 6, 6, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (7, 1, '엄마랑 통화했는데 오랜만에 따뜻한 말씀 해주셔서 눈물 날 뻔. 평소엔 바빠서 연락도 잘 안 했는데… 앞으로는 자주 해야겠다.', '2025-05-07', 7, 7, 7, 7, NOW(), NOW());
@@ -197,10 +197,10 @@ INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, trans
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (25, 1, '영화 또 봤는데 이번에도 좋았음. 요즘 영화 보는 게 최고의 힐링이야.', '2025-05-25', 25, 25, 25, 25, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (26, 1, '계획이 또 바뀌었지만, 이번엔 별로 신경 안 썼음. 유연해지는 중?', '2025-05-26', 26, 26, 26, 26, NOW(), NOW());
 INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (27, 1, '일기 쓰는 게 점점 습관이 되어간다. 오늘은 무슨 일이 있었더라…?', '2025-05-27', 27, 27, 27, 27, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (28, 1, '하루 종일 아무 생각 없이 보냈는데, 이게 진짜 휴식인 거 같다.', '2025-05-28', 28, 28, 28, 28, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (29, 1, '또 새로운 요리 도전했는데 이번엔 성공! 기분 좋다.', '2025-05-29', 29, 29, 29, 29, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (30, 1, '4월의 마지막 날. 이번 달은 정말 많은 일이 있었네. 내일부터는 새로운 마음으로 시작해보자.', '2025-05-30', 30, 30, 30, 30, NOW(), NOW());
-INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (31, 1, '새로운 사람들과 대화하니 재밌네. 다양한 생각을 접할 수 있어 좋다.', '2025-05-31', 31, 31, 31, 31, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (28, 1, '퇴근길에 버스 창밖을 보는데 괜히 눈물이 맺혔음. 바쁘게 걷는 사람들 속에 나만 멈춰 있는 기분이 들었고, 아무 말도 하기 싫어졌음. 웃으려고 해도 마음이 따라주지 않았고, 그냥 조용히 숨고 싶다는 생각만 들었음.', '2025-05-28', 28, 28, 28, 28, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (29, 1, '오늘 아무도 연락을 안 하니까 괜히 내가 필요 없는 사람처럼 느껴졌음. 누가 무시한 것도 아닌데, 조용한 핸드폰 화면 보면서 계속 마음이 가라앉았음. 스스로 괜찮다고 말해봤지만, 자꾸 외로움이 목 끝까지 차올랐음. 그냥 이유 없이 울고 싶은 날이었다.', '2025-05-29', 29, 29, 29, 29, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (30, 1, '오늘 회의에서 갑자기 내 의견을 물어보는 바람에 머릿속이 하얘졌음. 뭘 말해야 할지 생각도 안 나고, 다들 나만 쳐다보는 것 같아서 진짜 식은땀 났음. 대충 뭐라고 말은 했는데, 말 끝나고 나니까 내가 무슨 말을 했는지도 모르겠더라. 그냥 땅속으로 숨고 싶었다.', '2025-05-30', 30, 30, 30, 30, NOW(), NOW());
+INSERT INTO diary (diary_id, member_id, content, written_date, emotion_id, transform_diary_id, diary_feedback_id, depression_id, created_at, updated_at) VALUES (31, 1, '오늘따라 괜히 마음이 무거웠다. 누가 상처 준 것도 없고, 별일 없었는데도 눈물이 맺히는 느낌이랄까. 음악 한 곡 듣다가 울컥하고, 창밖 풍경만 봐도 왠지 모르게 허전했다. 웃으려 해도 그게 잘 안 됐고, 그냥 하루 종일 마음이 축축했다. 말하고 싶지도 않고, 듣고 싶지도 않은 그런 날이었다.', '2025-05-31', 31, 31, 31, 31, NOW(), NOW());
 
 INSERT INTO notice (notice_id, title, content, writer, created_at, updated_at) VALUES
 (1, '서비스 점검 안내', '안정적인 서비스 제공을 위해 서버 점검이 진행됩니다.', '박지우', NOW(), NOW()),

@@ -47,7 +47,7 @@ public class EmotionService {
             String content = diary.getTransformDiary().getContent();
             log.info("파이썬에 전달할 텍스트: {}", content);
 
-            // ✅ 변경된 부분: EmotionSession을 직접 사용
+            // 변경된 부분: EmotionSession을 직접 사용
             String jsonOutput = EmotionSession.analyze(content);
             log.info("파이썬 결과 수신: {}", jsonOutput);
 

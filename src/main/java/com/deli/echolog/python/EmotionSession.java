@@ -26,10 +26,10 @@ public class EmotionSession {
             writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            log.info("✅ Emotion 파이썬 서버 프로세스 시작 완료");
+            log.info("Emotion 파이썬 서버 프로세스 시작 완료");
 
         } catch (IOException e) {
-            log.error("❌ Emotion 세션 초기화 실패", e);
+            log.error("Emotion 세션 초기화 실패", e);
             throw new RuntimeException("Emotion 파이썬 서버 실행 실패", e);
         }
     }
@@ -42,7 +42,7 @@ public class EmotionSession {
         writer.flush();
 
         String json = reader.readLine();
-        log.info("📤 Emotion 응답 수신: {}", json);
+        log.info("Emotion 응답 수신: {}", json);
         return json;
     }
 

@@ -31,8 +31,8 @@ INSERT INTO member (id, name, email, password, role, birth_date, phone, created_
 
 -- 관리자 5명
 INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at) VALUES
-(26, '박지우', 'junsang.yoo@example.com', 'pass1234', 'USER', '1993-12-24', '010-1000-0026', NOW(), NOW()),
-(27, '서민영', 'admin.haein@example.com', 'adminpw1', 'ADMIN', '1990-01-01', '010-2000-0027', NOW(), NOW()),
+(26, '박지우', 'junsang.yoo@example.com', 'pass1234', 'USER', '2000-01-03', '010-1000-0026', NOW(), NOW()),
+(27, '서민영', 'admin.haein@example.com', 'adminpw1', 'ADMIN', '2003-01-21', '010-2000-0027', NOW(), NOW()),
 (28, '김건우', 'admin.soyeon@example.com', 'adminpw2', 'ADMIN', '1990-02-02', '010-2000-0028', NOW(), NOW()),
 (29, '김승훈', 'admin.sihu@example.com', 'adminpw3', 'ADMIN', '1990-03-03', '010-2000-0029', NOW(), NOW()),
 (30, '안제현', 'admin.haneul@example.com', 'adminpw4', 'ADMIN', '1990-04-04', '010-2000-0030', NOW(), NOW());

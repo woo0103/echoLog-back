@@ -31,7 +31,7 @@ INSERT INTO member (id, name, email, password, role, birth_date, phone, created_
 
 -- 관리자 5명
 INSERT INTO member (id, name, email, password, role, birth_date, phone, created_at, updated_at) VALUES
-(26, '박지우', 'junsang.yoo@example.com', 'pass1234', 'USER', '1993-12-24', '010-1000-0026', NOW(), NOW()),
+(26, '박지우', 'junsang.yoo@example.com', 'pass1234', 'ADMIN', '1993-12-24', '010-1000-0026', NOW(), NOW()),
 (27, '서민영', 'admin.haein@example.com', 'adminpw1', 'ADMIN', '1990-01-01', '010-2000-0027', NOW(), NOW()),
 (28, '김건우', 'admin.soyeon@example.com', 'adminpw2', 'ADMIN', '1990-02-02', '010-2000-0028', NOW(), NOW()),
 (29, '김승훈', 'admin.sihu@example.com', 'adminpw3', 'ADMIN', '1990-03-03', '010-2000-0029', NOW(), NOW()),
@@ -65,7 +65,7 @@ INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (2
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (25, 'ANGRY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (26, 'JOY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (27, 'SAD', NOW(), NOW());
-INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (28, 'SAD', NOW(), NOW());
+INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (28, 'JOY', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (29, 'SAD', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (30, 'EMBARRASSED', NOW(), NOW());
 INSERT INTO emotion (emotion_id, emotion_type, created_at, updated_at) VALUES (31, 'SAD', NOW(), NOW());

@@ -7,6 +7,7 @@ import com.deli.echolog.domain.UserReaction;
 import com.deli.echolog.dto.diaryFeedback.DiaryFeedbackJsonRequestDto;
 import com.deli.echolog.dto.diaryFeedback.DiaryFeedbackJsonResponseDto;
 import com.deli.echolog.exception.DiaryFeedbackNotFoundException;
+import com.deli.echolog.python.DiaryFeedbackSession;
 import com.deli.echolog.repository.DiaryFeedbackRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -47,34 +48,34 @@ public class DiaryFeedbackService {
         diaryFeedback.getDiary().changeDiaryFeedback(null);
     }
 
-    // 분석
+    // 피드백 생성
     public DiaryFeedback generateFeedback(Diary diary) {
         try {
             EmotionType emotionType = diary.getEmotion().getEmotionType();
             String content = diary.getTransformDiary().getContent();
-            DiaryFeedbackJsonRequestDto diaryFeedbackJsonRequestDto = new DiaryFeedbackJsonRequestDto(emotionType, content);
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            String inputJson = objectMapper.writeValueAsString(diaryFeedbackJsonRequestDto);
-            log.info("파이썬에 전달할 JSON: {}", inputJson);
+            log.info("파이썬에 전달할 감정: {}, 내용: {}", emotionType, content);
 
-            String jsonOutput = PythonExecutor.execute("analyze_depression.py", inputJson);
+            // 파이썬 세션 호출
+            String jsonOutput = DiaryFeedbackSession.analyze(emotionType.name(), content);
             log.info("파이썬으로부터 받은 결과: {}", jsonOutput);
 
+            // 결과 파싱
+            ObjectMapper objectMapper = new ObjectMapper();
             DiaryFeedbackJsonResponseDto result = objectMapper.readValue(jsonOutput, DiaryFeedbackJsonResponseDto.class);
             String feedback = result.getFeedback();
 
+            // 저장 및 연관관계 설정
             DiaryFeedback diaryFeedback = new DiaryFeedback();
             diaryFeedback.update(feedback, null);
-
             DiaryFeedback saved = saveDiaryFeedback(diaryFeedback);
             diary.changeDiaryFeedback(saved);
+
             return saved;
+
         } catch (Exception e) {
-            log.error("우울증 분석 실패", e);
-            throw new RuntimeException("우울증 분석 중 예외 발생", e);
+            log.error("피드백 생성 실패", e);
+            throw new RuntimeException("피드백 생성 중 예외 발생", e);
         }
-
-
     }
 }

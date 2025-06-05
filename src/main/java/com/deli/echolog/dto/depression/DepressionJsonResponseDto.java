@@ -1,6 +1,7 @@
 package com.deli.echolog.dto.depression;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 public class DepressionJsonResponseDto {
 
     // 감정 점수
+    @JsonProperty("emoScore")
     private double emotionScore;
 
     // 우울 단어 점수

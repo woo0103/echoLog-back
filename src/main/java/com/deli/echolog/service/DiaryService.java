@@ -134,21 +134,45 @@ public class DiaryService {
     //미완
     @Transactional
     public void analyzeDiary(Diary diary) {
-        // 분석 후 연관관계까지 설정
+        // transform 일기 생성
         TransformDiary transformDiary = transformDiaryService.transform(diary);
+        diary.changeTransformDiary(transformDiary);
+
+        // emotion 분석
         Emotion emotion = emotionService.analyzeEmotion(diary);
+        diary.changeEmotion(emotion);
+
+        // feedback 생성
         DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
-        Depression depression = depressionService.analyzeDepression(diary);
+        diary.changeDiaryFeedback(diaryFeedback);
+
+        // 14일치 일기 기반으로 우울 분석
+        Long memberId = diary.getMember().getId();
+        LocalDate writtenDate = diary.getWrittenDate();
+        List<Diary> diaryList = getDiariesBy2weeks(memberId, writtenDate);
+
+        Depression depression = depressionService.analyzeDepression(diaryList);
+        diary.changeDepression(depression);
     }
+
 
     @Transactional
     public void analyzeDiary(Diary diary, TransformDiary transformDiary) {
-        // 분석 후 연관관계까지 설정
-        Emotion emotion = emotionService.analyzeEmotion(diary);
-        DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
-        Depression depression = depressionService.analyzeDepression(diary);
-
         diary.changeTransformDiary(transformDiary);
+
+        Emotion emotion = emotionService.analyzeEmotion(diary);
+        diary.changeEmotion(emotion);
+
+        DiaryFeedback diaryFeedback = diaryFeedbackService.generateFeedback(diary);
+        diary.changeDiaryFeedback(diaryFeedback);
+
+        Long memberId = diary.getMember().getId();
+        LocalDate writtenDate = diary.getWrittenDate();
+        List<Diary> diaryList = getDiariesBy2weeks(memberId, writtenDate);
+
+        Depression depression = depressionService.analyzeDepression(diaryList);
+        diary.changeDepression(depression);
     }
+
 
 }

@@ -1,32 +1,53 @@
-import json
-import random
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # TensorFlow 로그 감춤
+
 import sys
+import json
+import warnings
+import logging
 
-# 랜덤 피드백 메시지
-feedback_list = [
+warnings.filterwarnings("ignore")
+logging.getLogger("transformers.tokenization_utils_base").setLevel(logging.ERROR)
+logging.getLogger("transformers.configuration_utils").setLevel(logging.ERROR)
 
-    "당신은 지금 스스로를 바라보고, 조용히 들여다보고 있어요. 그건 이미 잘 버티고 있다는 증거입니다. 그냥 떠나고 싶다는 말이 나왔다는 건, 도망치고 싶다는 게 아니라, 잠시 쉬고 싶다는 마음일지도 몰라요."
+sys.path.append("/home/t25121/aidata")
+from Functions import diagnosis_melancholia
 
-]
+for line in sys.stdin:
+    try:
+        data = json.loads(line)
+        items = data.get("items", [])
 
-def analyze(input_json):
-    # 입력 파싱
-    data = json.loads(input_json)
-    content = data.get("content", "")
-    emotion_type = data.get("emotionType", "UNKNOWN")
+        if not items:
+            print(json.dumps({"error": "empty input"}), flush=True)
+            continue
 
-    # 수치 4개 랜덤 생성
-    result = {
-        "emotionScore": random.randint(0, 10),
-        "depressionWordScore": random.randint(0, 10),
-        "phq9Score": random.randint(15, 27),
-        "gad7Score": random.randint(15, 21),
-        "feedback": random.choice(feedback_list)
-    }
+        # 마지막 일기 하나로 emoScore, depressionScore 계산
+        last = items[-1]
+        last_emotion = last.get("emotion", "SAD")
+        last_log = last.get("log", "")
 
-    print(json.dumps(result, ensure_ascii=False))
+        emo_score, depression_score, _, _ = diagnosis_melancholia(last_emotion, last_log)
 
+        #  전체 14일치로 phq/gad 누적 계산
+        total_phq9_score = 0
+        total_gad7_score = 0
 
-if __name__ == "__main__":
-    input_json = sys.stdin.read()
-    analyze(input_json)
+        for item in items:
+            emotion = item.get("emotion", "SAD")  # 감정은 필요 없지만 함수 시그니처상 넘김
+            log = item.get("log", "")
+            _, _, phq9, gad7 = diagnosis_melancholia(emotion, log)
+            total_phq9_score += sum(phq9)
+            total_gad7_score += sum(gad7)
+
+        result = {
+            "emoScore": emo_score,
+            "depressionWordScore": round(depression_score, 2),
+            "phq9Score": total_phq9_score,
+            "gad7Score": total_gad7_score
+        }
+
+        print(json.dumps({"result": result}, ensure_ascii=False), flush=True)
+
+    except Exception as e:
+        print(json.dumps({"error": str(e)}), flush=True)

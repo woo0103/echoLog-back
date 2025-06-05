@@ -22,8 +22,10 @@ from Functions import create_feedback
 for line in sys.stdin:
     try:
         data = json.loads(line)
-        emotion = data.get("emotion", "SAD")
-        log = data.get("log", "")
+
+        # 키 유연하게 처리 (emotionType, content 도 지원)
+        emotion = data.get("emotion") or data.get("emotionType", "SAD")
+        log = data.get("log") or data.get("content", "")
 
         result = create_feedback(emotion, log)
         print(json.dumps({"feedback": result}, ensure_ascii=False), flush=True)

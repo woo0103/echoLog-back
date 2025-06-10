@@ -11,7 +11,7 @@ public class WhisperSession {
     static {
         try {
             String pythonPath = "python3"; // 리눅스 환경용
-            String scriptPath = "/home/t25121/voice_to_text.py";
+            String scriptPath = "/home/t25121/v1.0src/ai/voice_to_text.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");

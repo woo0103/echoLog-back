@@ -14,7 +14,7 @@ public class DepressionSession {
     static {
         try {
             String pythonPath = "python3";
-            String scriptPath = "/home/t25121/analyze_depression.py";
+            String scriptPath = "/home/t25121/v1.0src/ai/analyze_depression.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");

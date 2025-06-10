@@ -14,7 +14,7 @@ public class DiaryFeedbackSession {
     static {
         try {
             String pythonPath = "python3";
-            String scriptPath = "/home/t25121/generate_feedback.py";
+            String scriptPath = "/home/t25121/v1.0src/ai/generate_feedback.py";
 
             ProcessBuilder builder = new ProcessBuilder(pythonPath, scriptPath);
             builder.environment().put("PYTHONIOENCODING", "utf-8");
